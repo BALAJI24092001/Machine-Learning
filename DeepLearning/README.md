@@ -1,6 +1,9 @@
 ## DEEP LEARNING
 All the reading material and other useful resources collected and gathered here in this repo.
 
+The proof of back propagation algorithm using chained derivatives is given by Peter Sadowski, Department of Computer Science, University of California Irvine. [document](./Backprop Derivation.pdf)
+
+
 ### Text Books
 1. Pattern Recognition and Machine Learning, by Christopher Bishop
 2. Neural networks and deep learning by Michael Nielsen
