@@ -5,11 +5,15 @@ Loss is a how much error we get for a single observation, whereas the cost is th
 
 The equation for cost with one variable is:
 
-$J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}$
+$$
+J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+$$
 
 where
 
-$f_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{2}$
+$$
+f_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{2}
+$$
   
 - $f_{w,b}(x^{(i)})$ is our prediction for example $i$ using parameters $w,b$.
 - $(f_{w,b}(x^{(i)}) -y^{(i)})^2$ is the squared difference between the target value and the prediction.   
@@ -25,8 +29,7 @@ repeat until convergence:
 
 $$
 \begin{align} 
-w &= w -  \alpha \frac{\partial J(w,b)}{\partial w} \\
-& \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; \\; ----------- 3 \\
+w &= w -  \alpha \frac{\partial J(w,b)}{\partial w}; \\
 b &= b -  \alpha \frac{\partial J(w,b)}{\partial b}
 \end{align}$$
 
@@ -35,8 +38,8 @@ The gradient is defined as:
 
 $$
 \begin{align}
-\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})x^{(i)} --------- 4\\
-\frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})  ---------- 5 \\
+\frac{\partial J(w,b)}{\partial w}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})x^{(i)}\\
+\frac{\partial J(w,b)}{\partial b}  &= \frac{1}{m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})\\
 \end{align}
 $$
 
@@ -45,10 +48,12 @@ Here *simultaniously* means that you calculate the partial derivatives for all t
 ## Gradient Descent With Multiple Variables
 Gradient descent for multiple variables:
 
-$$\begin{align*} \text{repeat}&\text{ until convergence:} \\; \lbrace \newline\;
-& w_j = w_j -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial w_j}  \\; & \text{for j = 0..n-1}  ---------- 6 \\
+$$
+\begin{align*} \text{repeat}&\text{ until convergence:}\\ \lbrace \\ 
+& w_j = w_j -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial w_j} & \text{for j = 0 ... (n-1)} \\ 
 &b\ \ = b -  \alpha \frac{\partial J(\mathbf{w},b)}{\partial b}  \newline \rbrace
-\end{align*}$$
+\end{align*} \tag{5}
+$$
 
 where, n is the number of features, parameters $w_j$,  $b$, are updated simultaneously and where  
 
@@ -73,7 +78,7 @@ $$
 - the features vary significantly in magnitude making some features update much faster than others. In this case, $w_0$ is multiplied by 'size(sqft)', which is generally > 1000,  while $w_1$ is multiplied by 'number of bedrooms', which is generally 2-4.
 The solution is Feature Scaling.
 - Feature scaling, essentially dividing each positive feature by its maximum value, or more generally, rescale each feature by both its minimum and maximum values using (x-min)/(max-min). Both ways normalizes features to the range of -1 and 1, where the former method works for positive features which is simple and serves well for the lecture's example, and the latter method works for any features.
-- Mean normalization: $x_i := \dfrac{x_i - \mu_i}{max - min} $ 
+- Mean normalization: $x_i := \dfrac{x_i - \mu_i}{max - min}$ 
 - Z-score normalization which we will explore below. 
 
 ### z-score normalization 
@@ -141,14 +146,16 @@ Logistic Regression uses a loss function more suited to the task of categorizati
 This is defined: 
 * $loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)})$ is the cost for a single data point, which is:
 
-$$
-\begin{equation}
-  loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = \begin{cases}
-    - \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=1$}\\
-    - \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=0$}
-  \end{cases}
-\end{equation}
-$$
+<!--$$-->
+<!--\begin{equation}-->
+<!--  loss(f_{\mathbf{w},b}(\mathbf{x}^{(i)}), y^{(i)}) = \begin{cases}-->
+<!--    - \log\left(f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=1$} \\-->
+<!--    - \log \left( 1 - f_{\mathbf{w},b}\left( \mathbf{x}^{(i)} \right) \right) & \text{if $y^{(i)}=0$} \\-->
+<!--  \end{cases}-->
+<!--\end{equation}-->
+<!--$$-->
+
+![image](https://quicklatex.com/cache3/f4/ql_6eda099ce6cb362dd3d5e962739f2af4_l3.png)
 
 *  $f_{\mathbf{w},b}(\mathbf{x}^{(i)})$ is the model's prediction, while $y^{(i)}$ is the target value.
 
@@ -240,4 +247,4 @@ $$
     where $g(z)$ is the sigmoid function:  
     $g(z) = \frac{1}{1+e^{-z}}$   
     
-The term which adds regularization is  the <span style="color:#00CCFF">$\frac{\lambda}{m} w_j $</span>.
+The term which adds regularization is  the <span style="color:#00CCFF">$\frac{\lambda}{m} w_j$</span>.
