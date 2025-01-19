@@ -6,13 +6,17 @@ Loss is a how much error we get for a single observation, whereas the cost is th
 The equation for cost with one variable is:
 
 $$
+\begin{align}
 J(w,b) = \frac{1}{2m} \sum\limits_{i = 0}^{m-1} (f_{w,b}(x^{(i)}) - y^{(i)})^2 \tag{1}
+\end{align}
 $$
 
 where
 
 $$
+\begin{align}
 f_{w,b}(x^{(i)}) = wx^{(i)} + b \tag{2}
+\end{align}
 $$
   
 - $f_{w,b}(x^{(i)})$ is our prediction for example $i$ using parameters $w,b$.
