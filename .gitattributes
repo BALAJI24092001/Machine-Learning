@@ -1,7 +1,7 @@
-*.ipynb linguist-detectable=false
-*.md linguist-detectable=true
+*.ipynb linguist-detectable=true
+*.md linguist-detectable=false
 
-*.rst linguist-detectable=true
+*.rst linguist-detectable=false
 
 
 *.md linguist-vendored=false
