@@ -337,10 +337,13 @@ $$
 The maximum likelihood estimates are:
 
 1. Coefficients:
+
    $$
    \hat{\boldsymbol{\beta}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{y}.
    $$
+
 2. Variance of errors:
+
    $$
    \hat{\sigma}^2 = \frac{\| \mathbf{y} - \mathbf{X} \hat{\boldsymbol{\beta}} \|^2}{n}.
    $$
@@ -443,20 +446,26 @@ $$
 
    - Gradient Descent optimizes a function by moving iteratively in the opposite direction of its gradient.
    - For a cost function $J(\boldsymbol{\theta})$, the update rule is:
+
      $$
      \boldsymbol{\theta}_{k+1} = \boldsymbol{\theta}_k - \eta \nabla J(\boldsymbol{\theta}_k),
      $$
+
      where:
+
      - $\boldsymbol{\theta}_k$: Current parameter values,
      - $\eta$: Learning rate,
      - $\nabla J(\boldsymbol{\theta}_k)$: Gradient of the cost function.
 
 2. **Stochastic Gradient Descent**:
+
    - Instead of using the full dataset to compute the gradient, SGD uses a single training sample (or a small batch) at each step.
    - For a dataset with $n$ samples $\{ (\mathbf{x}_i, y_i) \}$, the update rule is:
+
      $$
      \boldsymbol{\theta}_{k+1} = \boldsymbol{\theta}_k - \eta \nabla J_i(\boldsymbol{\theta}_k),
      $$
+
      where $J_i(\boldsymbol{\theta}_k)$ is the cost function for the $i$-th sample.
 
 <u>_**Steps in Stochastic Gradient Descent**_</u>
@@ -473,9 +482,12 @@ $$
 3. _Iterative Updates_:
 
    - For each epoch (complete pass through the dataset):
+
      - For each sample $(\mathbf{x}_i, y_i)$:
+
        - Compute the gradient $\nabla J_i(\boldsymbol{\theta})$.
        - Update the parameters:
+
          $$
          \boldsymbol{\theta} = \boldsymbol{\theta} - \eta \nabla J_i(\boldsymbol{\theta}).
          $$
