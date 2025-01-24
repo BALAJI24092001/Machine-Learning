@@ -14,13 +14,14 @@ _**Basics**_
 1. [Cost Fucntion and optimization](#computing-cost)
 2. [Ordinary Least Squares](#ordinary-least-squares)
 3. [Maximum Likelihood Estimation](#maximum-likelihood-estimation)
-4. [Regularization](#regularization)
-5. [Gradient Descent](#gradient-descent)
-6. [Stochastic Gradient Descent](#stochastic-gradient-descent)
-7. [Bias Variance trade-off]()
-8. [Regularization]()
-9. [Data transformations]()
-10. [Cross-Validation methods]()
+4. [Evaluation Metrics - Regression]()
+5. [Regularization](#regularization)
+6. [Gradient Descent](#gradient-descent)
+7. [Stochastic Gradient Descent](#stochastic-gradient-descent)
+8. [Bias Variance trade-off]()
+9. [Regularization](#regularization)
+10. [Data transformations]()
+11. [Cross-Validation methods]()
 
 _**Linear Models**_
 
@@ -269,7 +270,7 @@ Note: This differs from the OLS variance estimate, which divides by $n - p$, mak
 
 ---
 
-#### Maximum Likelihood Estimation (MLE) for Multiple Linear Regression
+#### Maximum Likelihood Estimation (MLE)
 
 ##### The Model
 
@@ -494,6 +495,370 @@ $$
 
 4. _Stopping Criteria_:
    - Stop when the parameters converge (small change in $\boldsymbol{\theta}$) or after a fixed number of epochs.
+
+---
+
+#### Evaluation Metrics - Regression
+
+##### Mean Squared Error (MSE) 🏹
+
+**Definition**: MSE measures the average of the squares of the errors—that is, the average squared difference between the observed actual outcomes and the predicted outcomes.
+
+**Formula**:
+$$MSE = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
+
+where:
+
+- $n$ is the number of observations
+- $y_i$ is the actual value
+- $\hat{y}_i$ is the predicted value
+
+##### Root Mean Squared Error (RMSE) 👑
+
+**Definition**: RMSE is the square root of MSE and provides a measure of how well the model predictions match the observed data. RMSE is in the same units as the target variable, making it more interpretable.
+
+**Formula**:
+$$RMSE = \sqrt{MSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2}$$
+
+##### R-squared (Coefficient of Determination) 🐇
+
+**Definition**: R-squared measures the proportion of the variance in the dependent variable that is predictable from the independent variables. It provides an indication of the goodness of fit of a model.
+
+**Formula**:
+$$R^2 = 1 - \frac{\sum_{i=1}^{n} (y_i - \hat{y}_i)^2}{\sum_{i=1}^{n} (y_i - \bar{y})^2}$$
+
+where:
+
+- $\bar{y}$ is the mean of the actual values
+
+##### Adjusted R-squared 🐼
+
+**Definition**: Adjusted R-squared adjusts the R-squared value for the number of predictors in the model. It accounts for the fact that adding more predictors to a model will almost always increase the R-squared value, regardless of the actual improvement in model fit.
+
+**Formula**:
+$$\text{Adjusted } R^2 = 1 - \left( \frac{(1 - R^2)(n - 1)}{n - p - 1} \right)$$
+
+where:
+
+- $n$ is the number of observations
+- $p$ is the number of predictors
+
+##### Example
+
+Let's consider the following example dataset with actual and predicted values:
+
+| Observation | Actual ($y_i$) | Predicted ($\hat{y}_i$) |
+| ----------- | -------------- | ----------------------- |
+| 1           | 3              | 2.5                     |
+| 2           | 4              | 3.8                     |
+| 3           | 5              | 5.2                     |
+| 4           | 6              | 6.1                     |
+| 5           | 7              | 6.9                     |
+
+**Mean Squared Error (MSE)**
+
+First, calculate the squared errors:
+
+$$
+\begin{align*}
+(3 - 2.5)^2 &= 0.25 \\
+(4 - 3.8)^2 &= 0.04 \\
+(5 - 5.2)^2 &= 0.04 \\
+(6 - 6.1)^2 &= 0.01 \\
+(7 - 6.9)^2 &= 0.01 \\
+\end{align*}
+$$
+
+Then, compute the MSE:
+
+$$
+MSE = \frac{0.25 + 0.04 + 0.04 + 0.01 + 0.01}{5} = \frac{0.35}{5} = 0.07
+$$
+
+**Root Mean Squared Error (RMSE)**
+
+Calculate the RMSE:
+
+$$
+RMSE = \sqrt{0.07} \approx 0.2646
+$$
+
+**R-squared (Coefficient of Determination)**
+
+Calculate the total sum of squares (TSS):
+
+$$
+TSS = \sum_{i=1}^{5} (y_i - \bar{y})^2
+$$
+
+where $\bar{y}$ is the mean of actual values:
+
+$$
+\bar{y} = \frac{3 + 4 + 5 + 6 + 7}{5} = 5
+$$
+
+$$
+TSS = (3 - 5)^2 + (4 - 5)^2 + (5 - 5)^2 + (6 - 5)^2 + (7 - 5)^2 = 4 + 1 + 0 + 1 + 4 = 10
+$$
+
+Now, calculate the explained sum of squares (ESS):
+
+$$
+ESS = \sum_{i=1}^{5} (y_i - \hat{y}_i)^2 = 0.35
+$$
+
+Then, compute R-squared:
+
+$$
+R^2 = 1 - \frac{0.35}{10} = 1 - 0.035 = 0.965
+$$
+
+**Adjusted R-squared**
+
+Finally, calculate the Adjusted R-squared:
+
+$$
+\text{Adjusted } R^2 = 1 - \left( \frac{(1 - 0.965)(5 - 1)}{5 - 1 - 1} \right) = 1 - \left( \frac{(0.035)(4)}{3} \right) = 1 - 0.0467 \approx 0.9533
+$$
+
+---
+
+#### Evaluation Metrics - Classification
+
+These metrics are commonly used in evaluating the performance of classification models. They are derived from a confusion matrix, which summarizes the predictions of a binary classifier.
+
+##### Confusion Matrix
+
+For a binary classification problem:
+| | Predicted Positive | Predicted Negative |
+|----------------|---------------------|---------------------|
+| **Actual Positive** | True Positive (TP) | False Negative (FN) |
+| **Actual Negative** | False Positive (FP) | True Negative (TN) |
+
+- **True Positive (TP):** Correctly predicted positive cases.
+- **True Negative (TN):** Correctly predicted negative cases.
+- **False Positive (FP):** Negative cases incorrectly predicted as positive.
+- **False Negative (FN):** Positive cases incorrectly predicted as negative.
+
+---
+
+##### Accuracy 🎯
+
+Accuracy measures the proportion of correctly classified instances out of the total instances.
+
+$$
+\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+$$
+
+##### Precision (Positive Predictive Value) 🧮
+
+Precision measures the proportion of true positive predictions out of all positive predictions.
+
+$$
+\text{Precision} = \frac{TP}{TP + FP}
+$$
+
+##### Recall (Sensitivity) 🩺
+
+Recall measures the proportion of actual positives correctly identified.
+
+$$
+\text{Recall} = \frac{TP}{TP + FN}
+$$
+
+##### F1 Score ⚖️
+
+The F1 Score is the harmonic mean of precision and recall, balancing the two.
+
+$$
+\text{F1 Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+$$
+
+##### Specificity (True Negative Rate) ✅
+
+Specificity measures the proportion of actual negatives correctly identified.
+
+$$
+\text{Specificity} = \frac{TN}{TN + FP}
+$$
+
+##### Area Under the ROC Curve (AUC-ROC) 📈
+
+The AUC-ROC measures the ability of a classifier to distinguish between classes across all thresholds. The Receiver Operating Characteristic (ROC) curve plots **True Positive Rate (TPR)** vs. **False Positive Rate (FPR)** for various thresholds.
+
+- **TPR (Recall/Sensitivity):**
+  $$
+  TPR = \frac{TP}{TP + FN}
+  $$
+- **FPR:**
+  $$
+  FPR = \frac{FP}{FP + TN}
+  $$
+  The AUC is the integral of the ROC curve and represents the probability that a randomly chosen positive instance is ranked higher than a randomly chosen negative instance.
+
+$$
+\text{AUC} = \int_0^1 TPR(FPR) \, d(FPR)
+$$
+
+##### Matthews Correlation Coefficient (MCC) 🔗
+
+The MCC is a balanced metric that considers all elements of the confusion matrix, even in imbalanced datasets. It ranges from -1 to +1:
+
+- +1: Perfect prediction.
+- 0: Random guessing.
+- -1: Total disagreement.
+
+$$
+\text{MCC} = \frac{(TP \cdot TN) - (FP \cdot FN)}{\sqrt{(TP + FP)(TP + FN)(TN + FP)(TN + FN)}}
+$$
+
+##### Logarithmic Loss (Log Loss) 📉
+
+Log Loss measures the uncertainty of predictions by penalizing incorrect confidence levels. Lower Log Loss indicates better predictions.
+
+$$
+\text{Log Loss} = -\frac{1}{N} \sum_{i=1}^{N} \left( y_i \cdot \log(p_i) + (1 - y_i) \cdot \log(1 - p_i) \right)
+$$
+
+- $y_i$: Actual label (0 or 1).
+- $p_i$: Predicted probability of the positive class.
+- $N$: Total number of samples.
+
+##### Cohen's Kappa ⚖️
+
+Cohen's Kappa measures inter-rater agreement while accounting for the probability of agreement by chance. It ranges from -1 (total disagreement) to 1 (perfect agreement).
+
+$$
+\text{Kappa} = \frac{P_o - P_e}{1 - P_e}
+$$
+
+- $P_o$: Observed agreement ($\frac{TP + TN}{N}$).
+- $P_e$: Expected agreement based on random chance.
+
+$$
+P_e = \frac{(TP + FP)(TP + FN) + (TN + FP)(TN + FN)}{N^2}
+$$
+
+---
+
+##### Example
+
+###### Dataset
+
+**Actual Values:** `[1, 0, 1, 1, 0, 0, 1, 0, 0, 1]`  
+**Predicted Probabilities:** `[0.9, 0.3, 0.8, 0.4, 0.2, 0.1, 0.7, 0.6, 0.2, 0.9]`  
+**Predicted Labels (Threshold = 0.5):** `[1, 0, 1, 0, 0, 0, 1, 1, 0, 1]`
+
+###### Confusion Matrix
+
+|                 | Predicted Positive | Predicted Negative |
+| --------------- | ------------------ | ------------------ |
+| Actual Positive | 459 (TP)           | 51 (FN)            |
+| Actual Negative | 90 (FP)            | 400 (TN)           |
+
+###### Metrics Calculation
+
+1. Accuracy
+
+   $$
+   \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{459 + 400}{459 + 400 + 90 + 51} = \frac{859}{1000} = 0.859
+   $$
+
+2. Precision
+
+   $$
+   \text{Precision} = \frac{TP}{TP + FP} = \frac{459}{459 + 90} = \frac{459}{549} \approx 0.836
+   $$
+
+3. Recall (Sensitivity)
+
+   $$
+   \text{Recall} = \frac{TP}{TP + FN} = \frac{459}{459 + 51} = \frac{459}{510} \approx 0.900
+   $$
+
+4. F1 Score
+
+   $$
+   F1\ \text{Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}} = 2 \cdot \frac{0.836 \cdot 0.900}{0.836 + 0.900} \approx 0.867
+   $$
+
+5. Specificity
+
+   $$
+   \text{Specificity} = \frac{TN}{TN + FP} = \frac{400}{400 + 90} = \frac{400}{490} \approx 0.816
+   $$
+
+6. Area Under the ROC Curve (AUC-ROC)
+
+   For AUC-ROC, we need the True Positive Rate (TPR) and False Positive Rate (FPR):
+
+   $$
+   TPR = \text{Recall} = 0.900
+   $$
+
+   $$
+   FPR = \frac{FP}{FP + TN} = \frac{90}{90 + 400} = \frac{90}{490} \approx 0.184
+   $$
+
+   The AUC-ROC can be calculated using these rates, typically through integration or numerical methods. For simplicity, we assume an approximate AUC-ROC value based on the TPR and FPR, such as around 0.858.
+
+7. Matthews Correlation Coefficient (MCC)
+
+   $$
+   \text{MCC} = \frac{(TP \cdot TN) - (FP \cdot FN)}{\sqrt{(TP + FP)(TP + FN)(TN + FP)(TN + FN)}} \\ = \frac{(459 \cdot 400) - (90 \cdot 51)}{\sqrt{(459 + 90)(459 + 51)(400 + 90)(400 + 51)}} \approx 0.718
+   $$
+
+8. Logarithmic Loss (Log Loss)
+
+   We need the predicted probabilities for Log Loss. Assume we have predicted probabilities for the positive class; let's consider it for 10 instances (just an example):
+
+   - Actual: [1, 1, 1, 0, 0, 1, 0, 0, 1, 0]
+   - Predicted Probability: [0.9, 0.8, 0.7, 0.4, 0.3, 0.6, 0.2, 0.1, 0.9, 0.05]
+     $$
+     \text{Log Loss} = -\frac{1}{10} \sum_{i=1}^{10} \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right] \approx 0.216
+     $$
+
+9. Cohen's Kappa
+
+   $$
+   p_o = \frac{(TP + TN)}{1000} = \frac{(459 + 400)}{1000} = 0.859
+   $$
+
+   $$
+   p_e = \left(\frac{(459 + 51)}{1000} \times \frac{(459 + 90)}{1000}\right) + \left(\frac{(400 + 90)}{1000} \times \frac{(400 + 51)}{1000}\right) \approx 0.509
+   $$
+
+   $$
+   \kappa = \frac{0.859 - 0.509}{1 - 0.509} \approx 0.714
+   $$
+
+###### Summary Table
+
+| Metric           | Value |
+| ---------------- | ----- |
+| Accuracy         | 0.859 |
+| Precision        | 0.836 |
+| Recall           | 0.900 |
+| F1 Score         | 0.867 |
+| Specificity      | 0.816 |
+| AUC-ROC          | 0.858 |
+| Confusion Matrix | Shown |
+| MCC              | 0.718 |
+| Log Loss         | 0.216 |
+| Cohen's Kappa    | 0.509 |
+
+---
+
+- **High precision** ensures fewer false positives.
+- **High recall** ensures fewer false negatives.
+- **F1 Score** balances precision and recall.
+- **Specificity** complements recall by focusing on true negatives.
+- **Accuracy** provides an overall performance measure but may be misleading if the dataset is imbalanced.
+- **AUC-ROC** highlights the model's ability to rank predictions, especially useful for imbalanced datasets.
+- **Confusion Matrix** provides a breakdown of true and false predictions.
+- **MCC** is a robust metric for balanced evaluation, even in imbalanced datasets.
+- **Log Loss** evaluates probabilistic predictions and penalizes overconfidence in incorrect predictions.
+- **Cohen's Kappa** adjusts accuracy for chance agreement, making it valuable for agreement analysis.
 
 ---
 
