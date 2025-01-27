@@ -209,6 +209,16 @@ A + B = \begin{pmatrix}
 \end{pmatrix}
 $$
 
+let $C = A + B$ then $C^2$ is
+
+$$
+C^2 \neq A^2 + B^2 + 2AB \\
+$$
+
+$$
+C^2 = (A+B)(A+B) \\ \quad \quad\quad = A^2 + AB + BA + B^2
+$$
+
 ### Hadamard Product
 
 The Hadamard product is the element-wise multiplication of two matrices of the same dimensions. If $A$ and $B$ are both $m \times n$ matrices, their Hadamard product $C$ is:
