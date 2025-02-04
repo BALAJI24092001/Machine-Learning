@@ -317,45 +317,72 @@ A sentence is an assertion about the world in a knowledge representation languag
 
 Logical connectives are logical symbols that connect propositional symbols in order to reason in a more complex way about the world.
 
-- Not $(\lnot)$ inverses the truth value of the proposition. So, for example, if $P$: “It is raining,” then $\lnot P$: “It is not raining”.
+1. NOT $\neg$
+2. AND $\land$
+3. OR $\lor$
+4. Exclusive OR (Only one is true, not both) $\oplus$
+5. Implication $\rightarrow$
+6. Bi-Implication $\iff$
+7. NAND (Negation of AND) $\uparrow$
+8. NOR (Negation of OR) $\downarrow$
 
-  Truth tables are used to compare all possible truth assignments to propositions. This tool will help us better understand the truth values of propositions when connected with different logical connectives. For example, below is our first truth table:
+**Priority order in Propositional Logic**
 
-  | $P$   | $\lnot P$ |
-  | ----- | --------- |
-  | false | true      |
-  | true  | false     |
+$$
+( \quad ) \quad \textbf{>}\quad \neg\quad  \textbf{>}\quad \land\quad \textbf{>}\quad \lor\quad \textbf{>}\quad \rightarrow\quad \textbf{>}\quad \iff
+$$
 
-- And $(\land)$ connects two different propositions. When these two proposition, P and Q, are connected by $(\land)$, the resulting proposition $P \land) Q$ is true only in the case that both P and Q are true.
+##### Not $(\lnot)$
 
-  | P     | Q     | $P \land Q$ |
-  | ----- | ----- | ----------- |
-  | false | false | false       |
-  | false | true  | false       |
-  | true  | false | false       |
-  | true  | true  | true        |
+inverses the truth value of the proposition. So, for example, if $P$: “It is raining,” then $\lnot P$: “It is not raining”.
 
-- Or $(\lor)$ is true as as long as either of its arguments is true. This means that for $P \lor Q$ to be true, at least one of P or Q has to be true.
+Truth tables are used to compare all possible truth assignments to propositions. This tool will help us better understand the truth values of propositions when connected with different logical connectives. For example, below is our first truth table:
 
-  | P     | Q     | $P \land Q$ |
-  | ----- | ----- | ----------- |
-  | false | false | false       |
-  | false | true  | true        |
-  | true  | false | true        |
-  | true  | true  | true        |
+| $P$   | $\lnot P$ |
+| ----- | --------- |
+| false | true      |
+| true  | false     |
 
-  It is worthwhile to mention that there are two types of Or: an inclusive Or and an exclusive Or. In an exclusive Or, $P \lor Q$ is false if $P \land Q$ is true. That is, an exclusive Or requires only one of its arguments to be true and not both. An inclusive Or is true if any of $P$, $Q$, or $P \land Q$ is true. In the case of Or $(\lor)$, the intention is an inclusive Or.
+##### And $(\land)$
 
-- Implication $(\to)$ represents a structure of “if $P$ then $Q$.” For example, if $P$: “It is raining” and $Q$: “I’m indoors”, then $P \to Q$ means “If it is raining, then I’m indoors.” In the case of $P$ implies $Q (P \to Q), P$ is called the antecedent and $Q$ is called the consequent.<br>
+connects two different propositions. When these two proposition, P and Q, are connected by $(\land)$, the resulting proposition $P \land) Q$ is true only in the case that both P and Q are true.
 
-  When the antecedent is true, the whole implication is true in the case that the consequent is true (that makes sense: if it is raining and I’m indoors, then the sentence “if it is raining, then I’m indoors” is true). When the antecedent is true, the implication is false if the consequent is false (if I’m outside while it is raining, then the sentence “If it is raining, then I’m indoors” is false). However, when the antecedent is false, the implication is always true, regardless of the consequent. This can sometimes be a confusing concept. Logically, we can’t learn anything from an implication $(P \to Q)$ if the antecedent $(P)$ is false. Looking at our example, if it is not raining, the implication doesn’t say anything about whether I’m indoors or not. I could be an indoors type and never walk outside, even when it is not raining, or I could be an outdoors type and be outside all the time when it is not raining. When the antecedent is false, we say that the implication is trivially true.
+| P     | Q     | $P \land Q$ |
+| ----- | ----- | ----------- |
+| false | false | false       |
+| false | true  | false       |
+| true  | false | false       |
+| true  | true  | true        |
 
-  | $P$   | $Q$   | $P \to Q$ |
-  | ----- | ----- | --------- |
-  | false | false | true      |
-  | false | true  | true      |
-  | true  | false | false     |
-  | true  | true  | true      |
+##### Or $(\lor)$
+
+is true as as long as either of its arguments is true. This means that for $P \lor Q$ to be true, at least one of P or Q has to be true.
+
+| P     | Q     | $P \land Q$ |
+| ----- | ----- | ----------- |
+| false | false | false       |
+| false | true  | true        |
+| true  | false | true        |
+| true  | true  | true        |
+
+It is worthwhile to mention that there are two types of Or: an inclusive Or and an exclusive Or. In an exclusive Or, $P \lor Q$ is false if $P \land Q$ is true. That is, an exclusive Or requires only one of its arguments to be true and not both. An inclusive Or is true if any of $P$, $Q$, or $P \land Q$ is true. In the case of Or $(\lor)$, the intention is an inclusive Or.
+
+##### Exclusive OR (XOR) $\oplus$
+
+<!-- TODO: Add notes to this-->
+
+##### Implication $(\to)$
+
+represents a structure of “if $P$ then $Q$.” For example, if $P$: “It is raining” and $Q$: “I’m indoors”, then $P \to Q$ means “If it is raining, then I’m indoors.” In the case of $P$ implies $Q (P \to Q), P$ is called the **Hypothesis/Antecedent/Premise** and $Q$ is called the **Consequent/Conclusion**.<br>
+
+When the antecedent is true, the whole implication is true in the case that the consequent is true (that makes sense: if it is raining and I’m indoors, then the sentence “if it is raining, then I’m indoors” is true). When the antecedent is true, the implication is false if the consequent is false (if I’m outside while it is raining, then the sentence “If it is raining, then I’m indoors” is false). However, when the antecedent is false, the implication is always true, regardless of the consequent. This can sometimes be a confusing concept. Logically, we can’t learn anything from an implication $(P \to Q)$ if the antecedent $(P)$ is false. Looking at our example, if it is not raining, the implication doesn’t say anything about whether I’m indoors or not. I could be an indoors type and never walk outside, even when it is not raining, or I could be an outdoors type and be outside all the time when it is not raining. When the antecedent is false, we say that the implication is trivially true.
+
+| $P$   | $Q$   | $P \to Q$ |
+| ----- | ----- | --------- |
+| false | false | true      |
+| false | true  | true      |
+| true  | false | false     |
+| true  | true  | true      |
 
 - **Biconditional ($\iff$)** is an implication that goes both directions. You can read it as “if and only if.” $P \iff Q$ is the same as $P → Q$ and $Q → P$ taken together. For example, if $P$: “It is raining.” and $Q$: “I’m indoors,” then $P \iff Q$ means that “If it is raining, then I’m indoors,” and “If I’m indoors, then it is raining.” This means that we can infer more than we could with a simple implication. If $P$ is false, then $Q$ is also false; if it is not raining, we know that I’m also not indoors.
 
@@ -365,6 +392,24 @@ Logical connectives are logical symbols that connect propositional symbols in or
   | false | true  | false      |
   | true  | false | false      |
   | true  | true  | true       |
+
+#### Tautology, Contradition and Contingency
+
+<!-- TODO: Add notes to this-->
+
+**Tautology**: A given propositional/compound formula is always true. <br>
+**Contrdiction**: The compund formula is always false. <br>
+**Contingency**: Neither a Tautology not a Contradiction.
+
+#### Satisfiable, Valid and Falsifiable
+
+<!-- TODO: Add notes to this-->
+
+**Satisfiable**: Atleast one time true. Either a tautology or contingency.
+**Valid**: Always true. i.e., A Tautology
+**Falsifiable**: Atleast one time false: Either a Contradiction or contingency.
+**Un-falsifiable**: Always true. equivalent to Tautology, Valid
+**Un-satisfiable**: Never true. Always false. equivalent to Contridiction.
 
 #### Model
 

@@ -1591,7 +1591,7 @@ A decision tree is a popular algorithm used in machine learning for classificati
 We start by calculating the entropy of the entire dataset. Entropy measures the impurity or disorder in the dataset.
 
 $$
-Entropy(S) = - \sum\_{i=1}^{c} p_i \log_2(p_i)
+Entropy(S) = - \sum_{i=1}^{c} p_i \log_2(p_i)
 $$
 
 Here, $p_i$ is the probability of each class (Yes or No) in the dataset.
@@ -1630,7 +1630,7 @@ $$
 Information Gain measures the reduction in entropy after a dataset is split on an attribute.
 
 $$
-IG(T, X) = Entropy(T) - \sum\_{i=1}^{n} \frac{|T_i|}{|T|} Entropy(T_i)
+IG(T, X) = Entropy(T) - \sum_{i=1}^{n} \frac{|T_i|}{|T|} Entropy(T_i)
 $$
 
 **For Outlook:**
