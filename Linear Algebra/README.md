@@ -968,6 +968,35 @@ $$
 , \, \lambda_1, \lambda_2 \in \mathbb{R} \right\}
 $$
 
+## Eigen Values and Eigen vectors
+
+The solutions to the characteristic polynomial given by the equation
+
+$$
+| A - \lambda I | = 0
+$$
+
+where $\lambda$ are the eigen values such that, for a symetric matrix of order $n \times n$ has n eigen values such that
+
+$$
+Av = \lambda v \\
+\text{    where v is a column vector and } \lambda \text{ is a eigen value.}
+$$
+
+### Repeating Eigen Values
+
+If for a matrix A of dim $n \times n$ you get $n-2$ distinct and eigen values, then the eigen vectors corresponding to these $n-1$ eigen values are linearly independent. The remaining two eigen values have the same value, i.e., $\lambda = a$, then the maximum number of linearly independent eigen vectors are 2 since it's algebric multiplicity is 2.
+
+If you get $\lambda = 0$ as an eigen value, and it's algebric multiplicity is 1, then rank of A is $R(A) = n-1$. This means the rank of null space is determined by the number of 0 valued eigen values.
+
+If $\lambda = 0$ has algebric multiplicity > 1. Say the algebric multiplicity of 0 valued eigen value is a, then the number of linearly independent eigen vectors correspoding to 0 valued eigen value will give the span of Null space of matrix A. So the rank of the Null space can be atmost a, i.e., the maximum rank of null space can be the algebric multiplicity of the 0 valued eigen value.
+
+> [REF](https://youtu.be/8LT1TK2mSCI?list=PLgjejdknTfWP9cYIHjxBRRdtGcUBLmCQC)
+
+**Important Points**
+
+1. For any symmetric matrix, the number of non-real eigen values are always divisible by 2. 0 (mod 2) = 0
+
 ## Matrix Decomposition
 
 ### LU Decomposition

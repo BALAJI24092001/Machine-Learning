@@ -31,3 +31,11 @@ An Un-supervised learning model is used to find patterns in data. It helps to fi
 4. Elliptic Envelope
 
 ---
+
+## Dimentionality Reduction
+
+### Linear Discriminant Analysis
+
+This is a dimension reduction technique simillar to PCA, but in PCA we try to increase the variance of only the independent variables, whereas in LDA we try to maximize the distance between the different class means and also reduce the variance in the independent variables for each class there by making the classes get denser and the means of the classes dispersed as much as possible.
+
+Let us assume we have n observation of k classes. Then we need to calculate

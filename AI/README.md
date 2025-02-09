@@ -2,13 +2,17 @@
 
 <!-- TODO: Notes on Turing Test-->
 
+<!-- TODO: Add Sokobon Puzzle problem-->
+
 ## Search Algorithms
 
 Search algorithms in AI are the algorithms that are created to aid the searchers in getting the right solution. The search issue contains search space, first start and end point. Now by performing simulation of scenarios and alternatives, searching algorithms help AI agents find the optimal state for the task. Artificial Intelligence is the study of building agents that act rationally. Most of the time, these agents perform some kind of search algorithm in the background in order to achieve their tasks.
 
 Logic used in algorithms processes the initial state and tries to get the expected state as the solution. Because of this, AI machines and applications just functioning using search engines and solutions that come from these algorithms can only be as effective as the algorithms.
 
-### Search Algorithm Terminologies:
+---
+
+### Search Algorithm Terminologies
 
 **Search**: Searchingis a step by step procedure to solve a search-problem in a given search space. A search problem can have three main factors:
 
@@ -59,42 +63,43 @@ Following are the four essential properties of search algorithms to compare the 
 **Time Complexity**: Time complexity is a measure of time for an algorithm to complete its task.<br>
 **Space Complexity**: It is the maximum storage space required at any point during the search, as the complexity of the problem.<br>
 
+---
+
 ### Types of Search Algorithms
 
-```plantuml
+```mermaid
 
-@startuml
+classDiagram
+    class SearchAlgorithm
 
-!define RECTANGLE class
-RECTANGLE "Search Algorithm" as SA
+    class Uninformed {
+        1. Breadth-first Search
+        2. Depth-first Search
+        3. Depth-limited Search
+        4. Iterative deepening depth-first search
+        5. Uniform cost search
+        6. Bidirectional Search
+    }
 
-RECTANGLE "Uninformed" as Uninformed {
- 1. Breadth-first Search
- 2. Depth-first Search
- 3. Depth-limited Search
- 4. Iterative deepening depth-first search
- 5. Uniform cost search
- 6. Bidirectional Search
-}
+    class Informed {
+        1. Greedy Best First Search Algorithm
+        2. A* Search Algorithm
+        3. Hill Climbing
+    }
 
-RECTANGLE "Informed" as Informed {
- 1. Greedy Best First Search Algorithm
- 2. A* Search Algorithm
- 3. Hill Climbing
-}
+    class Adversarial {
+        1. Minimax search
+        2. Depth Limited Minimax
+        3. Alpha-beta pruning
+    }
 
-RECTANGLE "Adversarial Search" as Adversarial {
- 1. Minimax search
- 2. Depth Limited Minimax
- 3. Alpha-beta pruning
-}
-
-SA -down-> Uninformed
-SA -down-> Informed
-SA -down-> Adversarial
-@enduml
+    SearchAlgorithm --> Uninformed
+    SearchAlgorithm --> Informed
+    SearchAlgorithm --> Adversarial
 
 ```
+
+---
 
 ### Uninformed Search Algorithms
 
@@ -102,15 +107,17 @@ Uninformed search algorithms are fundamental tools in the field of Artificial In
 
 The term means that the strategies have no additional information about states beyond that provided in the problem definition. All they can do is generate successors and distinguish a goal state from a non-goal state. All search strategies are distinguished by the order in which nodes are expanded.
 
+---
+
 #### Breadth-first Search
 
-Breadth-first search is a complete search algorithm, guaranteeing that it will find a solution if one exists by exploring all nodes at each level of the search tree.
+Breadth-first search is a <u>**complete search algorithm**</u>, guaranteeing that it will find a solution if one exists by exploring all nodes at each level of the search tree.
 
 - It ensures optimality in terms of finding the shallowest goal node, but it may not always find the optimal solution in terms of the least-cost path if edge costs are not uniform.
   <br>
 - The algorithm generates all shallower nodes before deeper ones, making it inefficient in terms of time and memory when the search tree is deep.
   <br>
-- The use of a **FIFO queue** for the frontier ensures that new nodes are always deeper than their parents, maintaining the breadth-first exploration strategy.
+- The use of a <u>**FIFO queue (Queue DS)**</u> for the frontier ensures that new nodes are always deeper than their parents, maintaining the breadth-first exploration strategy.
   <br>
 - Breadth-first search applies the goal test when a node is generated, ensuring that any found goal node is indeed the shallowest one, eliminating the need to compare multiple shallow goal nodes.
 
@@ -145,15 +152,9 @@ Breadth-first search is a complete search algorithm, guaranteeing that it will f
 
 Where, <br>b = branching factor (require finite b) <br>d = depth of shallowest solution.
 
-**When to Use Uninformed Search:**<br>
+All the nodes remain in memory, so both time and space complexity are $O(b^d)$. Exponential bounds like that are scary. As a typical real-world example, consider a problem with branch ing factor b = 10, processing speed 1 million nodes/second, and memory requirements of 1 Kbyte/node. A search to depth d = 10 would take less than 3 hours, but would require 10 terabytes of memory. The memory requirements are a bigger problem for breadth-first search than the execution time. But time is still an important factor. At depth d = 14, even with infinite memory, the search would take 3.5 years. In general, exponential-complexity search problems cannot be solved by uninformed search for any but the smallest instances.
 
-- Uninformed search algorithms are suitable for small to moderately sized search spaces where domain-specific knowledge is limited or unavailable.<br>
-- They are a good choice when you need a simple, general-purpose approach to problem-solving.<br>
-
-**Limitations:**<br>
-
-- Uninformed search algorithms may be inefficient for large search spaces.<br>
-- They do not take advantage of domain-specific information, which can lead to unnecessary exploration.<br>
+---
 
 ---
 
@@ -161,9 +162,9 @@ Where, <br>b = branching factor (require finite b) <br>d = depth of shallowest s
 
 Depth-First Search (DFS) is a complete search algorithm that explores as far as possible along a branch of the search tree before backtracking.
 
-- It may not guarantee optimality in terms of finding the shortest path, especially when edge costs are not uniform.
+- It may <u>**not guarantee optimality**</u> in terms of finding the shortest path, especially when edge costs are not uniform.
 - DFS tends to generate a deeper search tree before exploring shallower nodes, which can be more memory-efficient than BFS for deep search trees.
-- It uses a Last-In-First-Out (LIFO) stack for managing the frontier, which means it explores one branch entirely before moving on to the next.
+- It uses a <u>**LIFO (stack)**</u> for managing the frontier, which means it explores one branch entirely before moving on to the next.
 - The goal test is applied when a node is selected for expansion, which may lead to multiple solutions.
 
 **Algorithm**
@@ -215,67 +216,212 @@ Depth-First Search (DFS) is a complete search algorithm that explores as far as 
 
 ---
 
+---
+
+#### Depth-limited Search
+
+1. DLS is a modification of DFS that restricts the depth of exploration.
+2. It uses a depth limit parameter to determine how deep into the tree or graph it can explore
+3. Depth-limited search alleviates the infinite-state space problem by setting a predetermined depth limit.
+4. It solves the infinite-path problem but can be incomplete if the shallowest goal is beyond the limit.
+5. Depth-limited search becomes nonoptimal if the depth limit is greater than the depth to the goal state.
+6. Its time complexity is O($𝑏^d$), and its space complexity is O(bd), where b is the branching 𝑑 factor and d is the depth limit.
+7. Depth-first search is a special case of depth-limited search with an infinite depth limit (∞).
+
+|                                                                       | Depth-First Search (DFS)                                          | Depth-Limited Search (DLS)                                        |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- |
+| **Exploration Strategy**                                              | Explores as far as possible along a branch before backtracking    | Limits exploration to a specified depth and then backtracks       |
+| **Completeness**                                                      | Not complete in infinite or cyclical graphs                       | Complete if depth limit >= depth of shallowest goal               |
+| **Optimality**                                                        | Does not guarantee optimality                                     | Does not guarantee optimality, especially with low depth limit    |
+| **Memory Usage**                                                      | Can be memory-efficient                                           | Can be memory-efficient, especially for shallow depth limits      |
+| **Termination**                                                       | Can continue indefinitely in graphs with infinite paths           | Terminates when reaching the depth limit                          |
+| **Used to control depth of exploration, efficiency, memory concerns** | Used to control depth of exploration, efficiency, memory concerns | Used to control depth of exploration, efficiency, memory concerns |
+
+---
+
+#### Iterative Deepening Depth-First Search
+
+---
+
+#### Uniform Cost Search
+
+---
+
+#### Bidirectional Search
+
+---
+
+| Algorithm                        | Complete? | Optimal Cost? | Time Complexity  | Space Complexity           |
+| -------------------------------- | --------- | ------------- | ---------------- | -------------------------- |
+| Breadth-First Search (BFS)       | Yes       | Yes           | $O(b^d)$         | $O(b^d)$                   |
+| Depth-First Search (DFS)         | No        | No            | $O(b^d)$         | $O(bd)$                    |
+| Depth-Limited Search (DLS)       | No        | No            | $O(b^l)$         | $O(bl)$ (l is depth limit) |
+| Uniform Cost Search              | Yes       | Yes           | $O(b^{(C^*/ε)})$ | $O(b^{(C^*/ε)})$           |
+| Iterative Deepening Search (IDS) | Yes       | Yes           | $O(b^d)$         | $O(bd)$                    |
+| Bidirectional Search             | Yes       | Yes           | $O(b^{(d/2)})$   | $O(b^{(d/2)})$             |
+
+where $C^*$ is the cost of optimal solution.
+
+---
+
 ### Informed Search Algorithms
+
+Uninformed search algorithms are used when there is no information available about the goal state. If there is some information that we can extract about the goal state then we take advantage of this information using a cost function which calculates both the distance from initial state to the current state and from current state to the goat state.
+
+$$
+f(n) =  h(n) + g(n)
+$$
+
+where: <br>
+$h(n)$ is the huristic cost. <br>
+$g(n)$ is the path cost from initial node. <br>
+$f(n)$ is the evaluation function.
+
+Huristic cost is calculated as, the distance from the current state to goal state. (Eg: Eucledian distance, Manhattan distance etc.)
+
+In DFS or BFS we used either queue or stack to maintain the frotier and another list to maintain all the explored states. In Informed search algorithms, we use priority queues. Priority queues is a data structure, where the data is sorted after each insertion operation based on the value that the node it carries. Use this priority queues, we choose the best explorable state, with minimum cost value.
+
+---
+
+#### Huristic Function
+
+The huristic fucntion is the main cost fucntion that gives us information about the goal node position, from our current position. It is denoted by $h(n)$, n being the current node, it calculates the cost from the current node to the goal node using some distance function. Most commonly used distances are Manhattan distance, Eucledian distance, Minkowski Distance etc.
+
+**Manhattan distance**, also known as L1 distance or taxicab distance, is a way of measuring distance in a grid-like path. It calculates the total distance between two points by summing up the absolute differences of their coordinates.
+
+$$
+D = |x_1 - x_2| + |y_1 - y_2|
+$$
+
+In higher dimensions, for points $\mathbf{x}_i$ and $\mathbf{x}_j$ with coordinates $(x_{i1}, x_{i2}, \ldots, x_{id})$ and $(x_{j1}, x_{j2}, \ldots, x_{jd})$, the formula generalizes to:
+
+$$
+D(\mathbf{x}_i, \mathbf{x}_j) = \sum_{l=1}^{d} |x_{il} - x_{jl}|
+$$
+
+**Euclidean distance** is a measure of the straight-line distance between two points in Euclidean space. It is the most common and intuitive way of measuring distance, derived from the Pythagorean theorem.
+
+The formula to calculate the Euclidean distance between two points $(x_1, y_1)$ and $(x_2, y_2)$ in a 2-dimensional space is:
+
+$$
+D = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}
+$$
+
+In higher dimensions, for points $\mathbf{x}_i$ and $\mathbf{x}_j$ with coordinates $(x_{i1}, x_{i2}, \ldots, x_{id})$ and $(x_{j1}, x_{j2}, \ldots, x_{jd})$, the formula generalizes to:
+
+$$
+D(\mathbf{x}_i, \mathbf{x}_j) = \sqrt{\sum_{l=1}^{d} (x_{il} - x_{jl})^2}
+$$
+
+Euclidean distance is widely used in various fields such as mathematics, physics, computer science, and machine learning for tasks like clustering, classification, and optimization. It provides a direct and simple way to determine how far apart two points are in a multi-dimensional space.
+
+There are some other popular distance metrics, but they are less generally applicable as heuristics.
+
+**Chebyshev Distance** - the distance along a single coordinate, whichever is bigger. While this should usually be admissible (it will underestimate because it doesn't take into account movement along the other axes), it is strictly less informative than Manhattan distance. There may be some occasions where this is useful, but they are uncommon.
+
+**Minkowski Distance** - a general case of Manhattan Distance and Euclidean (straight line) distance. However, it is notably less intuitive than either of those special cases, so, again, I can't come up with a good example of when you would choose it over one of them.A
+
+$$
+D(\mathbf{x}_i, \mathbf{x}_j) = \left( \sum_{l=1}^{d} \left| x_{il} - x_{jl} \right|^{1/p} \right)^p
+$$
+
+**Hamming Distance** - This isn't applicable to all problems, but it is calculated as the minimum number of edits that you would need to make to two vectors to make them identical. Since it is the minimum number, it would potentially be admissible for some problems, such as the word mutation game with equal length words. (If word lengths were unequal you would need to use Levenshtein Distance, which allows gaps to be inserted. This takes a fairly long time to compute (O(n^2)) and so is less likely to be an efficient heuristic).
+
+**Canberra Distance**, a sort of scaled Manhattan Distance, is often used for points scattered around the origin, but would be inadmissible in many cases.
+
+**Jaccard Distance** is a similarity measure used when comparing sets of features. It weights presences of features more strongly than absences. Problems in which you need to use a heuristic on feature sets are relatively uncommon, so it's hard to know what reasonable default assumptions for admissibility would be. In general, I would guess that the asymmetry between present and absent features could make Jaccard distance inadmissible for some problems, but that it's likely to not be a problem if you truly only care about present features.
+
+##### Admisiable Huristic
+
+If a Huristic never overestimates the cost, then we say the huristic is admissible.
+
+What happens if the huristic is over-estimating? <br>
+If the huristic is over-estimating the cost then the possiblility of getting an optimal path is not possible, but if the huristic is under-estimating the cost, then after reaching the goal state through non-optimal path, the evaluation cost would be higher than the cost from the smallest node in the frontier and the algorithm would explore the smallest node in the frontier and it will eventually find the optimal, i.e., the smallest path. So it is impossible to find an optimal path if the huristic function is over-estimating, so we need the huristic value to be always estiamte the cost same as the original cost or underestimate it.
+
+> [REF](https://youtu.be/xz1Nq6cZejI?list=PLxCzCOWd7aiHGhOHV-nwb0HR5US5GFKFI)
+
+##### Cosistent Huristic
+
+A huristic $h(n)$ is consistent, if for every node `n` and every every successor `n'` of n generated by an action 'a', we have:
+
+$$
+h(b) \leq c(n, a, n') + h(n')
+$$
+
+---
 
 #### Greedy Best First Search
 
-```plantuml
+In this algorithm we are given an initial state, we start with a priority queue frontier with this initial state and add all the explorable states to the frontier and arrange them in ascending order.
 
+Only after a node is removed, we explore the node and add the next explorable nodes to the frontier. Whenever there is an insertion operation to the priority queue, we sort the queue to arrange all the nodes.
 
-@startuml
+The cost function used in this algorithm is
 
-scale 700 width
+$$
+f(n) = h(n)
+$$
 
-skinparam RECTANGLE {
-    BackgroundColor #E1E1E1
-    ArrowColor #0000FF
-    BorderColor #000000
-}
-skinparam HEADK {
-    BackgroundColor #ADD8E6
-    ArrowColor #0000FF
-    BorderColor #000000
-}
+The time and space complexity is given by $O(b^d)$ in worst case scenario.
 
-!define RECTANGLE class
-!define HEAD class
-HEAD "Search Algorithm" as SA {
-}
+---
 
-RECTANGLE "Uninformed" as Uninformed #ADD8E6 {
-  1. Breadth-first Search
-  2. Depth-first Search
-  3. Depth-limited Search
-  4. Iterative deepening depth-first search
-  5. Uniform cost search
-  6. Bidirectional Search
-}
+#### Beam Search Algorithm
 
-RECTANGLE "Informed" as Informed #90EE90 {
-  1. Greedy Best First Search Algorithm
-  2. A* Search Algorithm
-  3. Hill Climbing
+This is an updated version of Greedy Best First Search algorithm. We consider a beam width constrain in this algorithm, so the space complexity and time complexity are less when compared to GBFS algorithm.
 
+Beam Width: It is denoted by $\beta$, and it states how many explorable nodes to be added to the frontier. Only the first $\beta$ number of nodes, with the small cost values are added to the frontier.
 
-.
-}
+---
 
-RECTANGLE "Adversarial Search" as Adversarial #FFB6C1 {
-  1. Minimax search
-  2. Depth Limited Minimax
-  3. Alpha-beta pruning
+#### $A^*$ Search Algorithm
 
+$A^*$ search algorithm uses the information given about the goal state using huristic function.
+The Huristic function used by $A^*$ algorithm is given by
 
-.
-}
+$$
+f(n) =  h(n) + g(n)
+$$
 
-SA -down-> Uninformed
-SA -down-> Informed
-SA -down-> Adversarial
-@enduml
+Priority queues are used for $A^*$ search algorithms.
 
+---
 
-```
+#### Hill Climbing Search Algorithm
+
+In Hill Climbing Search Algorithm, we use the greedy approach to change the states. We only select the next state based on the current state huristic value. If next state huristic value is less than the current state huristic value, then the algorithm choosed the next node with the minimum huristic value.
+
+Hill-Climbing search is a local search algorithm that continuously moves towards the direction of increasing value (or decreasing cost) and is not guaranteed to find the global optimal solution as it may get stuck in local maxima or plateaus.
+
+There are some problem to this algorithm.
+
+1. If the next state doesn't have a huristic value that is less than the huristic value of the current node, then the algorithm will stop working.
+2. If it reaches a local mimimum, where all the next states has higher huristic value and but after a constant raise it will reach the global minimum, but the algorithm will stop at the local minimum, since all of it's next states contains huristics higher than the current state, hence it doesn't return the optimal path, but might give some sub-optimal path.
+
+---
+
+Certainly! Here’s the updated table with the Hill-Climbing search algorithm included:
+
+| Algorithm         | Optimal Path                    | Time Complexity | Space Complexity |
+| ----------------- | ------------------------------- | --------------- | ---------------- |
+| Greedy Best-First | No                              | $O(b^m)$        | $O(b^m)$         |
+| A\*               | Yes (with admissible heuristic) | $O(b^d)$        | $O(b^d)$         |
+| Uniform Cost      | Yes                             | $O(b^d)$        | $O(b^d)$         |
+| Beam Search       | No                              | $O(b^m)$        | $O(k \times d)$  |
+| Hill-Climbing     | No                              | $O(b^m)$        | $O(b \times m)$  |
+
+Here:
+
+- $b$ is the branching factor (average number of successors per state).
+- $d$ is the depth of the optimal solution.
+- $m$ is the maximum depth of the search space.
+- $k$ is the beam width in Beam Search.
+
+---
+
+### Adversarial Search
+
+Adversarial search algorithms are used in multi player games.
 
 ## Logic
 
@@ -285,6 +431,8 @@ In which we design agents that can form representations of a complex world, use 
 2. Problem-solving agents, while knowledgeable in limited, domain-specific ways, can benefit from more flexible and domain-independent knowledge representations, such as logic.
 3. Logic serves as a general class of representations for knowledge-based agents, enabling them to combine and adapt information for various purposes.
 4. Propositional logic, though less expressive than first-order logic, offers fundamental concepts and powerful inference technologies for building knowledge-based agents.
+
+---
 
 ### Propositional Logic
 
@@ -313,6 +461,8 @@ A sentence is an assertion about the world in a knowledge representation languag
 
 **Propositional Symbols** : Propositional symbols are most often letters (P, Q, R) that are used to represent a proposition.
 
+---
+
 #### Logical Connectives
 
 Logical connectives are logical symbols that connect propositional symbols in order to reason in a more complex way about the world.
@@ -329,8 +479,13 @@ Logical connectives are logical symbols that connect propositional symbols in or
 **Priority order in Propositional Logic**
 
 $$
+
 ( \quad ) \quad \textbf{>}\quad \neg\quad  \textbf{>}\quad \land\quad \textbf{>}\quad \lor\quad \textbf{>}\quad \rightarrow\quad \textbf{>}\quad \iff
+
+
 $$
+
+---
 
 ##### Not $(\lnot)$
 
@@ -343,6 +498,8 @@ Truth tables are used to compare all possible truth assignments to propositions.
 | false | true      |
 | true  | false     |
 
+---
+
 ##### And $(\land)$
 
 connects two different propositions. When these two proposition, P and Q, are connected by $(\land)$, the resulting proposition $P \land) Q$ is true only in the case that both P and Q are true.
@@ -353,6 +510,8 @@ connects two different propositions. When these two proposition, P and Q, are co
 | false | true  | false       |
 | true  | false | false       |
 | true  | true  | true        |
+
+---
 
 ##### Or $(\lor)$
 
@@ -367,9 +526,13 @@ is true as as long as either of its arguments is true. This means that for $P \l
 
 It is worthwhile to mention that there are two types of Or: an inclusive Or and an exclusive Or. In an exclusive Or, $P \lor Q$ is false if $P \land Q$ is true. That is, an exclusive Or requires only one of its arguments to be true and not both. An inclusive Or is true if any of $P$, $Q$, or $P \land Q$ is true. In the case of Or $(\lor)$, the intention is an inclusive Or.
 
+---
+
 ##### Exclusive OR (XOR) $\oplus$
 
 <!-- TODO: Add notes to this-->
+
+---
 
 ##### Implication $(\to)$
 
@@ -384,14 +547,20 @@ When the antecedent is true, the whole implication is true in the case that the 
 | true  | false | false     |
 | true  | true  | true      |
 
-- **Biconditional ($\iff$)** is an implication that goes both directions. You can read it as “if and only if.” $P \iff Q$ is the same as $P → Q$ and $Q → P$ taken together. For example, if $P$: “It is raining.” and $Q$: “I’m indoors,” then $P \iff Q$ means that “If it is raining, then I’m indoors,” and “If I’m indoors, then it is raining.” This means that we can infer more than we could with a simple implication. If $P$ is false, then $Q$ is also false; if it is not raining, we know that I’m also not indoors.
+---
 
-  | $P$   | $Q$   | $P \iff Q$ |
-  | ----- | ----- | ---------- |
-  | false | false | true       |
-  | false | true  | false      |
-  | true  | false | false      |
-  | true  | true  | true       |
+##### **Biconditional ($\iff$)**
+
+An implication that goes both directions. You can read it as “if and only if.” $P \iff Q$ is the same as $P → Q$ and $Q → P$ taken together. For example, if $P$: “It is raining.” and $Q$: “I’m indoors,” then $P \iff Q$ means that “If it is raining, then I’m indoors,” and “If I’m indoors, then it is raining.” This means that we can infer more than we could with a simple implication. If $P$ is false, then $Q$ is also false; if it is not raining, we know that I’m also not indoors.
+
+| $P$   | $Q$   | $P \iff Q$ |
+| ----- | ----- | ---------- |
+| false | false | true       |
+| false | true  | false      |
+| true  | false | false      |
+| true  | true  | true       |
+
+---
 
 #### Tautology, Contradition and Contingency
 
@@ -400,6 +569,8 @@ When the antecedent is true, the whole implication is true in the case that the 
 **Tautology**: A given propositional/compound formula is always true. <br>
 **Contrdiction**: The compund formula is always false. <br>
 **Contingency**: Neither a Tautology not a Contradiction.
+
+---
 
 #### Satisfiable, Valid and Falsifiable
 
@@ -411,21 +582,29 @@ When the antecedent is true, the whole implication is true in the case that the 
 **Un-falsifiable**: Always true. equivalent to Tautology, Valid
 **Un-satisfiable**: Never true. Always false. equivalent to Contridiction.
 
+---
+
 #### Model
 
 The model is an assignment of a truth value to every proposition. To reiterate, propositions are statements about the world that can be either true or false. However, knowledge about the world is represented in the truth values of these propositions. The model is the truth-value assignment that provides information about the world.
 
 For example, if P: “It is raining.” and Q: “It is Tuesday.”, a model could be the following truth-value assignment: {P = True, Q = False}. This model means that it is raining, but it is not Tuesday. However, there are more possible models in this situation (for example, {P = True, Q = True}, where it is both raining and a Tuesday). In fact, the number of possible models is 2 to the power of the number of propositions. In this case, we had 2 propositions, so 2^2 = 4 possible models.
 
+---
+
 #### Knowledge Base (KB)
 
 The knowledge base is a set of sentences known by a knowledge-based agent. This is knowledge that the AI is provided about the world in the form of propositional logic sentences that can be used to make additional inferences about the world.
+
+---
 
 #### Entailment (⊨)
 
 If $α ⊨ β$ ($α$ entails $β$), then in any world where $α$ is true, $β$ is true, too.
 
 For example, if α: “It is a Tuesday in January” and β: “It is January,” then we know that $α ⊨ β$. If it is true that it is a Tuesday in January, we also know that it is January. Entailment is different from implication. Implication is a logical connective between two propositions. Entailment, on the other hand, is a relation that means that if all the information in α is true, then all the information in $β$ is true.
+
+---
 
 ### Inference
 
@@ -517,6 +696,8 @@ Note that we are interested only in the models where the $KB$ is true. If the $K
 
 Further, the way the check_all function works is recursive. That is, it picks one symbol, creates two models, in one of which the symbol is true and in the other the symbol is false, and then calls itself again, now with two models that differ by the truth assignment of this symbol. The function will keep doing so until all symbols will have been assigned truth-values in the models, leaving the list symbols empty. Once it is empty (as identified by the line if not symbols), in each instance of the function (wherein each instance holds a different model), the function checks whether the $KB$ is true given the model. If the $KB$ is true in this model, the function checks whether the query is true, as described earlier.
 
+---
+
 ### Knowledge Engineering
 
 Knowledge engineering is the process of figuring out how to represent propositions and logic in AI.
@@ -573,6 +754,8 @@ $$
 $$
 
 and so on for all houses and all people. A solution to this inefficiency is offered in the section on first order logic. However, this type of riddle can still be solved with either type of logic, given enough cues.
+
+---
 
 ### Inference Rules
 
@@ -743,6 +926,8 @@ Inference can be viewed as a search problem with the following properties:
 
 This shows just how versatile search algorithms are, allowing us to derive new information based on existing knowledge using inference rules.
 
+---
+
 ### Resolution
 
 Resolution is a powerful inference rule that states that if one of two atomic propositions in an Or proposition is false, the other has to be true. For example, given the proposition “Ron is in the Great Hall” Or “Hermione is in the library”, in addition to the proposition “Ron is not in the Great Hall,” we can conclude that “Hermione is in the library.” More formally, we can define resolution the following way:
@@ -818,15 +1003,21 @@ Here is an example that illustrates how this algorithm might work:
 - Next, since we know $(¬B)$, the only way $(A ∨ B)$ can be true is if $A$ is true. Thus, we can add $(A)$ to our $KB$.<br>
 - Now our KB has two complementary literals, $(A)$ and $(¬A)$. We resolve them, arriving at the empty set, (). The empty set is false by definition, so we have arrived at a contradiction.<br>
 
+---
+
 ### Predicate Logical / First Order Logic
 
 First order logic is another type of logic that allows us to express more complex ideas more succinctly than propositional logic. First order logic uses two types of symbols: Constant Symbols and Predicate Symbols. Constant symbols represent objects, while predicate symbols are like relations or functions that take an argument and return a true or false value.
 
 For example, we return to the logic puzzle with different people and house assignments at Hogwarts. The constant symbols are people or houses, like Minerva, Pomona, Gryffindor, Hufflepuff, etc. The predicate symbols are properties that hold true or false of some constant symbols. For example, we can express the idea that Minerva is a person using the sentence Person(Minerva). Similarly, we can express the idea the Gryffindor is a house using the sentence House(Gryffindor). All the logical connectives work in first order logic the same way as before. For example, ¬House(Minerva) expresses the idea that Minerva is not a house. A predicate symbol can also take two or more arguments and express a relation between them. For example, BelongsTo expresses a relation between two arguments, the person and the house to which the person belongs. Thus, the idea that Minerva belongs to Gryffindor can be expressed as BelongsTo(Minerva, Gryffindor). First order logic allows having one symbol for each person and one symbol for each house. This is more succinct than propositional logic, where each person—house assignment would require a different symbol.
 
+---
+
 #### Universal Quantification
 
 Quantification is a tool that can be used in first order logic to represent sentences without using a specific constant symbol. Universal quantification uses the symbol ∀ to express “for all.” So, for example, the sentence ∀x. BelongsTo(x, Gryffindor) → ¬BelongsTo(x, Hufflepuff) expresses the idea that it is true for every symbol that if this symbol belongs to Gryffindor, it does not belong to Hufflepuff.
+
+---
 
 #### Existential Quantification
 

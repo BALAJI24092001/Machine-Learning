@@ -960,6 +960,29 @@ where:
 
 ### Bias-Variance trade-off
 
+The Mean Square Error of the linear regression model can be decomposed into three terms Bias, variance and randomness associated with training error, testing error and noise due to depenend variable. The noise due to the data is inevitable, it cannot be optimized, so we need to play around with the bais and variance terms only.
+
+$$
+Generalized\ Error = Variance + Noise + Bias^2
+$$
+
+$$
+\mathbb{E}_{x,y,D} \left[ \left( h_D(\mathbf{x}) - y \right)^2 \right]
+= \underbrace{\mathbb{E}_{x,D} \left[ \left( h_D(\mathbf{x}) - \bar{h}(\mathbf{x}) \right)^2 \right]}_{\text{Variance}}
++ \underbrace{\mathbb{E}_{x,y} \left[ \left( \bar{h}(\mathbf{x}) - y \right)^2 \right]}_{\text{Noise}}
++ \underbrace{\mathbb{E}_{x} \left[ \left( \bar{h}(\mathbf{x}) - \bar{y}(\mathbf{x}) \right)^2 \right]}_{\text{Bias}^2}
+$$
+
+D is the training data drawn from the population with distribution P.
+
+**Variance**: Captures how much your classifier changes if you train on a different training set. How "over-specialized" is your classifier to a particular training set (overfitting)? If we have the best possible model for our training data, how far off are we from the average classifier?
+
+**Bias**: What is the inherent error that you obtain from your classifier even with infinite training data? This is due to your classifier being "biased" to a particular kind of solution (e.g. linear classifier). In other words, bias is inherent to your model.
+
+**Noise**: How big is the data-intrinsic noise? This error measures ambiguity due to your data distribution and feature representation. You can never beat this, it is an aspect of the data.
+
+> [REF1](https://www.cs.cornell.edu/courses/cs4780/2018fa/lectures/lecturenote12.html) <br>[REF2](https://youtu.be/zUJbRO0Wavo)
+
 ### Cross-Validation Methods
 
 <!-- TODO: Add notes on cross validation methods-->
