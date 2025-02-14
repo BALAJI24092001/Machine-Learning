@@ -107,6 +107,18 @@ Uninformed search algorithms are fundamental tools in the field of Artificial In
 
 The term means that the strategies have no additional information about states beyond that provided in the problem definition. All they can do is generate successors and distinguish a goal state from a non-goal state. All search strategies are distinguished by the order in which nodes are expanded.
 
+All the search algorithms, creates trees during the process of serch for the solution, so there is no one particular tree that this algorithms traverses through. During the process of traversing, the explorable nodes are created using the action function and added to the frontier(which maintains the possible next explorable set of nodes). So there the graph may look very differnt for tree traversals through DFS and BFS.
+
+1. Back Edge: In DFS, the search algorithm first explores the deepest node fromt the initial node, then fromt he deepest node, it comes back to the initial node again, which there create an edge from the deepest node to the first node, it is called a back edge.
+2. Cross Edge: In BFS, after a node is explored all it's children nodes are added to the frontier and then all the children nodes are explored, whereas there is no explicit edge between the children nodes, BFS jumps anyways tot he children node creating an arbitrary Cross Edge.
+
+Therefore in DFS, there are forward edges and back edges, whereas in BFS there are forward and cross edges.
+
+DFS Tree on Undirected Graph will have Tree edge and Back edge
+BFS Tree on Undirected Graph will have Tree edge and Cross edge.
+
+So, both will have same tree only if the graph has Tree edges.
+
 ---
 
 #### Breadth-first Search

@@ -552,7 +552,7 @@ In linear algebra, the four fundamental subspaces provide a deep understanding o
   \text{Row}(A) = \{ \mathbf{y} \in \mathbb{R}^n \mid \mathbf{y} = \mathbf{x}^T A \text{ for some } \mathbf{x} \in \mathbb{R}^m \}
   $$
 
-### 4. Left Null Space (N(A^T))
+### 4. Left Null Space ($N(A^T)$)
 
 - **Definition**: The left null space of a matrix $A$ is the null space of its transpose, $A^T$. It is the set of all vectors $\mathbf{y}$ that satisfy $A^T \mathbf{y} = \mathbf{0}$.
 - **Dimensionality**: The dimension of the left null space is given by $m - \text{rank}(A)$.
@@ -576,6 +576,25 @@ These four subspaces provide critical insights into the properties and behaviors
 ![Four Fundamental Subspaces](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/50ce4d8cddfa06b9c4d84f7e03a7e0e7_Unit_1_WIDE.jpg)
 
 </span>
+
+$$
+   \begin{pmatrix}
+   x_1 \\
+   x_2 \\
+   . \\
+   . \\
+   x_n
+   \end{pmatrix} y =
+   \begin{pmatrix}
+   0 \\
+   0 \\
+   . \\
+   . \\
+   0
+   \end{pmatrix}
+$$
+
+$x_1$ is a row vector belongs to Row space of matrix A, then y is orthogonal to Row Space. i.e., the null space of A is orthogonal to row space and col space is orthogonal to left null space of matrix A respectively.
 
 ## System of Linear Equations
 
@@ -1020,8 +1039,6 @@ $$
 
 Where $P$ is a permutation matrix.
 
----
-
 #### Steps for LU Decomposition Without Pivoting
 
 Let $A$ be an $n \times n$ matrix. The steps are as follows:
@@ -1047,8 +1064,6 @@ Let $A$ be an $n \times n$ matrix. The steps are as follows:
 
 3. **Repeat for All Rows:**
    - Continue this process for each column until $U$ becomes upper triangular.
-
----
 
 #### Example
 
@@ -1158,8 +1173,6 @@ A = LU = \begin{bmatrix}
 \end{bmatrix}.
 $$
 
----
-
 #### Applications of LU Decomposition
 
 1. **Solving Systems of Equations**: Solve $A\mathbf{x} = \mathbf{b}$ efficiently by solving $L\mathbf{y} = \mathbf{b}$ and $U\mathbf{x} = \mathbf{y}$.
@@ -1169,7 +1182,41 @@ $$
    \det(A) = \prod_{i} u_{ii}.
    $$
 
-Would you like help with solving a system using LU decomposition? 😊
+### QR Decomposition
+
+### Eigen Decomposition
+
+### Singular Value Decomposition
+
+1. **Start with a matrix $A$:**
+
+   $$
+   A \in \mathbb{R}^{m \times n}
+   $$
+
+2. **Compute the eigenvalues and eigenvectors of $AA^T$:**
+
+   - Let $U$ be the matrix of eigenvectors of $AA^T$.
+   - Let $\Sigma$ be the diagonal matrix of the square roots of the eigenvalues of $AA^T$.
+
+3. **Compute the eigenvalues and eigenvectors of $A^TA$:**
+
+   - Let $V$ be the matrix of eigenvectors of $A^TA$.
+
+4. **Construct the decomposition:**
+   - $U \in \mathbb{R}^{m \times m}$ is an orthogonal matrix.
+   - $\Sigma \in \mathbb{R}^{m \times n}$ is a diagonal matrix with non-negative real numbers on the diagonal.
+   - $V^T \in \mathbb{R}^{n \times n}$ is an orthogonal matrix.
+   - Combine these to get: $A = U \Sigma V^T$.
+
+### Applications of SVD:
+
+- **Data compression:** Reducing the dimensionality of datasets.
+- **Noise reduction:** Improving signal quality by removing noise.
+- **Recommendation systems:** Helping to predict user preferences in systems like Netflix or Amazon.
+
+**Note**<br>
+For a symmetric matrix $A$, the singular values from the SVD are same as the mod of the eigen values of the matrix $A$.
 
 ## Special Matrices
 
@@ -1577,20 +1624,45 @@ This means that when the matrix is multiplied by itself, the result is the same 
 5. **Data Transformation**:  
    Idempotent matrices are used to project data points onto subspaces.
 
-#### Resources
+## Misc
+
+**Similarity of Matrices**<br>
+Similar matrices are square matrices that represent the same linear map, but under different bases. They have the same rank, trace, determinant, and eigenvalues.
+Explanation
+
+- Two matrices $A$ and $B$ are similar if there exists a nonsingular matrix $S$ such that $A=S^{-1}BS$. 
+- The transformation $A\mapsto P^{-1}AP$ is called a similarity transformation or conjugation of the matrix $A$. 
+- Similar matrices have similar properties, even though they are not equal. 
+- Similarity is an equivalence relation, which means it satisfies the properties of transitivity. 
+
+Two matrices $A$ and $B$ are called similar if there exists another matrix $S$ such that
+
+$$
+ S^{-1}AS = B.
+$$
+
+Consider the statements:
+
+I. If $A$ and $B$ are similar then they have identical rank.
+
+II. If $A$ and $B$ are similar then they have identical trace.
+
+III. $A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ and $B = \begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}$ are similar.
+
+## References
 
 1. [Linear Algebra by 3Blue1Brown](https://www.3blue1brown.com/topics/linear-algebra)
 2. [MIT - Strang Video Lectures](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 3. [MIT-Gilbert Strang LA Book and other material](https://math.mit.edu/~gs/linearalgebra/ila6/indexila6.html)
 
-#### Books
+## Books
 
 1. [The Matrix Cookbook](https://www.math.uwaterloo.ca/~hwolkowi/matrixcookbook.pdf)
 2. Deisenroth, M. P., Faisal, A. A., &#38; Ong, C. S. (2020). Mathematics for Machine Learning. Cambridge: Cambridge University Press.
 3. Hogben, L. (Ed.). (2013). Handbook of Linear Algebra (2nd ed.). Chapman and Hall/CRC. https://doi.org/10.1201/b16113
 4. Strang, G. (2021). Introduction to Linear Algebra (5th ed.). Cambridge: CUP.
 
-<hr>
+---
 
 ## Appendix
 

@@ -985,6 +985,9 @@ D is the training data drawn from the population with distribution P.
 
 ### Cross-Validation Methods
 
+- When the dataset is small, the method is prone to high variance. Due to the random partition, the results can be entirely different for different test sets. To deal with this issue, we use cross-validation to evaluate the performance of a machine-learning model.
+- In cross-validation, we don’t divide the dataset into training and test sets only once. Instead, we repeatedly partition the dataset into smaller groups and then average the performance in each group. That way, we reduce the impact of partition randomness on the results.
+
 <!-- TODO: Add notes on cross validation methods-->
 
 ## Regression Models
@@ -1167,6 +1170,83 @@ $$
 
 **Note:** Ensure to perform matrix inversion and multiplication carefully.
 
+#### Weighted Least Squares
+
+In weighted least squares (WLS), the goal is to find a closed-form solution for the regression coefficients $\beta$ by minimizing the weighted sum of squared residuals.
+
+Assume we have access to data $\{(x_i, y_i)\}_{i=1}^n$, where $x_i \in \mathbb{R}^d$ and $y_i \in \mathbb{R}$. Assume that we also have access to weights $\{w_i\}_{i=1}^n$, $w_i \in \mathbb{R}$ and $w_i > 0$, which gives the "importance" of each data point. Our goal is to solve the weighted least squares regression problem:
+
+$$
+\hat{\theta} = \arg \min_{\theta \in \mathbb{R}^d} \sum_{i=1}^n w_i (x_i^T \theta - y_i)^2
+$$
+
+$$
+Denote (X = \begin{bmatrix}
+x_1^T \\
+\vdots \\
+x_n^T \\
+\end{bmatrix}
+\in \mathbb{R}^{n \times d},
+Y = \begin{bmatrix}
+y_1 \\
+\vdots \\
+y_n
+\end{bmatrix}
+\in \mathbb{R}^n, \text{ and } W = \begin{bmatrix}
+w_1 & 0 & \cdots & 0 \\
+0 & w_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & w_n
+
+\end{bmatrix}
+\in \mathbb{R}^{n \times n}.
+$$
+
+The linear regression model is:  
+$$ y = X\beta + \epsilon $$  
+where:
+
+- $y \in \mathbb{R}^n$ is the response vector
+- $X \in \mathbb{R}^{n \times p}$ is the design matrix
+- $\beta \in \mathbb{R}^p$ is the vector of coefficients
+- $\epsilon \in \mathbb{R}^n$ is the error term
+
+In **Weighted Least Squares**, the residual sum of squares (RSS) is weighted by a positive definite diagonal matrix $W = \text{diag}(w_1, w_2, \dots, w_n)$ containing weights for each observation. The weighted RSS is:  
+$$ \text{RSS} = (y - X\beta)^T W (y - X\beta) $$
+
+We need to minimize the objective function:
+
+$$
+\min_\beta (y - X\beta)^T W (y - X\beta)
+$$
+
+Take the derivative with respect to $\beta$ and set it to zero:
+
+1. Expand the quadratic form:
+   $$
+   \text{RSS} = y^T W y - 2 \beta^T X^T W y + \beta^T X^T W X \beta
+   $$
+2. Take the gradient with respect to $\beta$:
+   $$
+   \frac{\partial \text{RSS}}{\partial \beta} = -2 X^T W y + 2 X^T W X \beta
+   $$
+3. Set the gradient to zero and solve for $\beta$:
+   $$
+   X^T W X \beta = X^T W y
+   $$
+
+If $X^T W X$ is invertible, the solution for $\beta$ is:
+
+$$
+\beta = (X^T W X)^{-1} X^T W y
+$$
+
+**Notes** <br>
+
+- $W$ should be a positive definite matrix to ensure the weights are meaningful and the matrix $X^T W X$ is invertible.
+- When $W = I_n$ (identity matrix), this reduces to the standard ordinary least squares (OLS) solution:  
+  $$ \beta = (X^T X)^{-1} X^T y $$
+
 #### HAT Matrix
 
 $$
@@ -1232,7 +1312,7 @@ Understanding these properties can help you analyze and interpret the results of
 
 ### Ridge Regression
 
-Ridge Regression is a type of linear regression that includes a regularization term to prevent overfitting. It adds a penalty term to the cost function, which is proportional to the square of the magnitude of the coefficients. The objective is to minimize the following cost function:
+Ridge Regression is a type of linear regression that includes a regularization term to _mitigate multicollinearity and overfitting in Multiple Linear Regression_. It adds a penalty term to the cost function, which is proportional to the square of the magnitude of the coefficients. The objective is to minimize the following cost function:
 
 The general regression model is:
 
@@ -1241,10 +1321,6 @@ $$
 $$
 
 The regularized cost function is:
-
-$$
-J(\boldsymbol{\beta}) = \|\mathbf{y} - \mathbf{X} \boldsymbol{\beta}\|^2 + \lambda R(\boldsymbol{\beta}),
-$$
 
 $$
 J(\boldsymbol{\beta}) = \|\mathbf{y} - \mathbf{X} \boldsymbol{\beta}\|^2 + \lambda \|\boldsymbol{\beta}\|_2^2,
@@ -1702,6 +1778,20 @@ Here's a simplified decision tree based on the calculations:
 ```
 
 By using these steps and calculations, we build a decision tree that helps us make predictions based on the attributes of the data. If you have any specific questions or need more details, feel free to ask!
+
+## Support Vector Machines(SVM)
+
+Given a dataset $D = \{(x_i, y_i)\}$, $x_i \in \mathbb{R}^k$, $y_i \in \{-1, +1\}$, $1 \le i \le N$.
+
+The the hinge loss function is given by
+
+$$
+hinge\ loss = \max (0, 1 - y_i w^T x_i)
+$$
+
+## Misc
+
+- For any convex function that is twice differentiable $z^T\triangledown^2f(x)z \geq 0$. i.e., the Hessian matrix is always semi-positive definite.
 
    <!--### Estimating Parameters-->
    <!---->

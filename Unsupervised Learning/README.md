@@ -34,8 +34,14 @@ An Un-supervised learning model is used to find patterns in data. It helps to fi
 
 ## Dimentionality Reduction
 
+### Principal Component Analysis
+
+> [REF](https://jonathan-hui.medium.com/machine-learning-singular-value-decomposition-svd-principal-component-analysis-pca-1d45e885e491) <br> [Sebastian Raschka](https://sebastianraschka.com/Articles/2015_pca_in_3_steps.html)
+
 ### Linear Discriminant Analysis
 
 This is a dimension reduction technique simillar to PCA, but in PCA we try to increase the variance of only the independent variables, whereas in LDA we try to maximize the distance between the different class means and also reduce the variance in the independent variables for each class there by making the classes get denser and the means of the classes dispersed as much as possible.
 
 Let us assume we have n observation of k classes. Then we need to calculate
+
+> n [Sebastian Raschaka](https://sebastianraschka.com/Articles/2014_python_lda.html)
