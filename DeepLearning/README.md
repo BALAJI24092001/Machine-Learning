@@ -17,6 +17,12 @@
 
 The proof of back propagation algorithm using chained derivatives is given by Peter Sadowski, Department of Computer Science, University of California Irvine. [document](./Backprop Derivation.pdf)
 
+[Neural Network intuituion](https://youtu.be/ER2It2mIagI?list=PLeo1K3hjS3uu7CxAacxVndI4bE_o3BDtO): Daval Patel(Codebasics) explains neural network intuition with a simple example.
+
+### Questions
+
+1. Why data scaling increases accuracy
+
 ### Text Books
 
 1. Pattern Recognition and Machine Learning, by Christopher Bishop

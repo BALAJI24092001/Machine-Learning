@@ -22,3 +22,8 @@ A challenge we face regularly in machine learning is that concepts and words are
 2. [Mining Massive Datasets - Data Mining](https://www.youtube.com/playlist?list=PLLssT5z_DsK9JDLcT8T62VtzwyW9LNepV)
 3. [NLP - University of Michigan](https://www.youtube.com/playlist?list=PLLssT5z_DsK8BdawOVCCaTCO99Ya58ryR)
 4. [Anomaly Detection - scikit-learn ](https://scikit-learn.org/stable/modules/outlier_detection.html)
+
+### Documentary
+
+1. [AlphaGO - Google Deepmind](https://www.youtube.com/watch?v=WXuK6gekU1Y&ab_channel=GoogleDeepMind)
+2. [The bit player - Claude Shannon](https://youtu.be/CCrpgUM_rYc)
