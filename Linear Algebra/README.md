@@ -6,105 +6,39 @@
 
    </span>
 
-**Matrices:**
+## Introduction
+
+**Vectors**
+
+A vector is an array of numbers. The numbers are arranged in order. We can identify each individual number by its index in that ordering. Typically, we give vectors lower case names written in bold typeface, such as $\textbf{\textit{x}}$. The elements of the vector are identified by writing its name in italic typeface, with a subscript. The first element of $\textbf{\textit{x}}$ is $\textit{x}_1$, the second element is $\textit{x}_2$ and so on. We also need to say what kind of numbers are stored in the vector. If each element is in $\mathbb{R}$, and the vector has n elements, then the vector lies in the set formed by taking the Cartesian product of R n times, denoted as $\mathbb{R}^n$. When we need to explicitly identify the elements of a vector, we write them as a column enclosed in square brackets.
+
+$$
+\mathbf{x} = \begin{pmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{pmatrix}
+$$
+
+**Matrices**
 
 - Elements in a rectangular array with numbers in rows and columns.
 - Order of a matrix is given by $m \times n$ where $m$ is the number of rows and $n$ is the number of columns.
 - Number of elements in a matrix is $m \times n$.
-
-**Matrix Representation:**
-
 - A matrix $A = [a_{ij}]_{m \times n}$ where $i$ represents the row number and $j$ represents the column number.
 - Horizontal elements are called rows.
 - Vertical elements are called columns.
 
-## Types of Matrices
+**Tensors**
 
-1. **Row Matrix:**
-
-   - Having only one row.
-   - Represented as $A = [a_{1j}]$ where $1 \leq j \leq n$.
-
-2. **Column Matrix:**
-
-   - Having only one column.
-   - Represented as $A = [a_{i1}]$.
-
-3. **Horizontal Matrix:**
-
-   - Number of columns (n) > number of rows (m).
-
-4. **Vertical Matrix:**
-
-   - Number of columns (n) < number of rows (m).
-
-5. **Zero Matrix:**
-
-   - Matrix of any order with all entries as 0.
-
-6. **Triangular Matrices**:
-
-   - **Upper Triangular**: $a_{ij} = 0$ for $i > j$.
-     - Example:
-       $$
-       \begin{bmatrix}
-       a & b & c \\
-       0 & d & e \\
-       0 & 0 & f
-       \end{bmatrix}
-       $$
-   - **Lower Triangular**: $a_{ij} = 0$ for $i < j$.
-
-     - Example:
-
-       $$
-       \begin{bmatrix}
-       a & 0 & 0 \\
-       b & c & 0 \\
-       d & e & f
-       \end{bmatrix}
-       $$
-
-     **Number of Minimum Zeroes in Triangular Matrices**:<br>
-
-   - Formula: $\frac{n^2 - n}{2}$.
-
-     **Product of Diagonal Elements**:<br>
-
-   - For triangular matrices: $| \text{triangular} | = \text{product of diagonal elements} = | \text{diagonal matrix} |$.
-     <br>
-
-7. **Diagonal Matrices**:
-
-   - **Diagonal**: $a_{ij} = 0$ for $i \neq j$.
-     - Example:
-       $$
-       \begin{bmatrix}
-       d_1 & 0 & 0 \\
-       0 & d_2 & 0 \\
-       0 & 0 & d_3
-       \end{bmatrix}
-       $$
-   - **Scalar**: All diagonal elements are equal.
-     - Example:
-       $$
-       \begin{bmatrix}
-       a & 0 & 0 \\
-       0 & a & 0 \\
-       0 & 0 & a
-       \end{bmatrix}
-       $$
-   - **Unit Matrix**: All diagonal elements are 1.
-     - Example:
-       $$
-       \begin{bmatrix}
-       1 & 0 & 0 \\
-       0 & 1 & 0 \\
-       0 & 0 & 1
-       \end{bmatrix}
-       $$
+In some cases we will need an array with more than two axes. In the general case, an array of numbers arranged on a regular grid with a variable number of axes is known as a tensor. We denote a tensor named "A" with this typeface: **A**. We identify the element of **A** at coordinates $(i, j, k)$ by writing $A_{i,j,k}$.
 
 ## Properties
+
+### Arithmetic Properties
+
+There are four basic properties of numbers: commutative, associative, distributive, and identity. Simillar to these properties for numbers, there are similar properties for the arthematic operations performed on matrices. These properties are listed below.
 
 1. **Commutative Property of Addition**:
 
@@ -130,7 +64,7 @@
 ### Trace of a Matrix
 
 Let $A$ be a square matrix, then the trace of matrix a; denoted by $\text{TR}(\mathbf{A})$ is sum of all the diagonal elements.
-i.e.. $\sum_{i=1}^{n}A_{i,i}\quad$ where $n$ is dimension of the matrix.
+i.e. $\sum_{i=1}^{n}A_{i,i}\quad$ where $n$ is dimension of the matrix.
 
 $$
 \begin{aligned}
@@ -148,7 +82,7 @@ $$
 
 Matrix multiplication is defined as the dot product of rows and columns between two matrices. The number of columns in the first matrix must equal the number of rows in the second matrix.
 
-If $A$ is an $m \times n$ matrix and $B$ is an $n \times p$ matrix, their product $AB$ is an $m \times p$ matrix:
+If $A$ is a $m \times n$ matrix and $B$ is a $n \times p$ matrix, their product $AB$ is a $m \times p$ matrix:
 
 $$
 C = AB, \quad \text{where} \ C_{ij} = \sum_{k=1}^{n} A_{ik}B_{kj}
@@ -517,6 +451,92 @@ $$
    -5 & 7 & 1
    \end{pmatrix}
    $$
+
+## Types of Matrices
+
+1. **Row Matrix:**
+
+   - Having only one row.
+   - Represented as $A = [a_{1j}]$ where $1 \leq j \leq n$.
+
+2. **Column Matrix:**
+
+   - Having only one column.
+   - Represented as $A = [a_{i1}]$.
+
+3. **Horizontal Matrix:**
+
+   - Number of columns (n) > number of rows (m).
+
+4. **Vertical Matrix:**
+
+   - Number of columns (n) < number of rows (m).
+
+5. **Zero Matrix:**
+
+   - Matrix of any order with all entries as 0.
+
+6. **Triangular Matrices**:
+
+   - **Upper Triangular**: $a_{ij} = 0$ for $i > j$.
+     - Example:
+       $$
+       \begin{bmatrix}
+       a & b & c \\
+       0 & d & e \\
+       0 & 0 & f
+       \end{bmatrix}
+       $$
+   - **Lower Triangular**: $a_{ij} = 0$ for $i < j$.
+
+     - Example:
+
+       $$
+       \begin{bmatrix}
+       a & 0 & 0 \\
+       b & c & 0 \\
+       d & e & f
+       \end{bmatrix}
+       $$
+
+     **Number of Minimum Zeroes in Triangular Matrices**:<br>
+
+   - Formula: $\frac{n^2 - n}{2}$.
+
+     **Product of Diagonal Elements**:<br>
+
+   - For triangular matrices: $| \text{triangular} | = \text{product of diagonal elements} = | \text{diagonal matrix} |$.
+     <br>
+
+7. **Diagonal Matrices**:
+
+   - **Diagonal**: $a_{ij} = 0$ for $i \neq j$.
+     - Example:
+       $$
+       \begin{bmatrix}
+       d_1 & 0 & 0 \\
+       0 & d_2 & 0 \\
+       0 & 0 & d_3
+       \end{bmatrix}
+       $$
+   - **Scalar**: All diagonal elements are equal.
+     - Example:
+       $$
+       \begin{bmatrix}
+       a & 0 & 0 \\
+       0 & a & 0 \\
+       0 & 0 & a
+       \end{bmatrix}
+       $$
+   - **Unit Matrix**: All diagonal elements are 1.
+     - Example:
+       $$
+       \begin{bmatrix}
+       1 & 0 & 0 \\
+       0 & 1 & 0 \\
+       0 & 0 & 1
+       \end{bmatrix}
+       $$
 
 ## Four Fundamental Sub-Spaces
 
