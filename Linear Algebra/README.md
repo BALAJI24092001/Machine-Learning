@@ -1,12 +1,16 @@
-<span style="font-family: 'Times New Roman'; font-size: 1.15em;">
-
 <span align = 'center'>
 
 # LINEAR ALGEBRA
 
-   </span>
+</span>
 
 ## Introduction
+
+Imagine a coordinate system of 2 dimensions, then a vector can be imagined as a specific point in that space represented with 2 numbers in a specific order, which guides us to move by scale in each direction of the imagined 2 dimensional space.
+
+Let $x$ be a 2 dim vector, $x = (1, 2)^T$, then the vector $x$ is the point situated at exactly 1 units in the x direction and 2 units in the y direction. In generic terms, 1 unit in the 1st direction 2 units in the second direction.
+
+Simillarly for an n dimensional space, a vector is represented by n numbers in specific order that represents a specific point in that coordinate system.
 
 **Vectors**
 
@@ -18,10 +22,14 @@ x_1 \\
 x_2 \\
 \vdots \\
 x_n
-\end{pmatrix}
+\end{pmatrix}An
 $$
 
+**NOTE**: A vector is always a columnt vector, i.e., a matrix of dimension $n\times1$.
+
 **Matrices**
+
+The intuitive understanding of a matrix comes from the usecase of matrices. Take an identity matrix, which is all values of 1 in the diagonal positions and all 0 in non-diagonal poisitions. If the identity matrix is of dim n, then a column vector of dim n is said to be the linear combination of the column vectors of the identity matrix. In general, the column vectors in the identity matrix are called the trival basis.
 
 - Elements in a rectangular array with numbers in rows and columns.
 - Order of a matrix is given by $m \times n$ where $m$ is the number of rows and $n$ is the number of columns.
@@ -34,9 +42,160 @@ $$
 
 In some cases we will need an array with more than two axes. In the general case, an array of numbers arranged on a regular grid with a variable number of axes is known as a tensor. We denote a tensor named "A" with this typeface: **A**. We identify the element of **A** at coordinates $(i, j, k)$ by writing $A_{i,j,k}$.
 
+## Types of Matrices
+
+1. **Row Matrix:**
+
+   - Having only one row.
+   - Represented as $A = [a_{1j}]$ where $1 \leq j \leq n$.
+
+2. **Column Matrix:**
+
+   - Having only one column.
+   - Represented as $A = [a_{i1}]$.
+
+3. **Horizontal Matrix:**
+
+   - Number of columns (n) > number of rows (m).
+
+4. **Vertical Matrix:**
+
+   - Number of columns (n) < number of rows (m).
+
+5. **Zero Matrix:**
+
+   - Matrix of any order with all entries as 0.
+
+6. **Triangular Matrices**:
+
+   - **Upper Triangular**: $a_{ij} = 0$ for $i > j$.
+     - Example:
+       $$
+       \begin{bmatrix}
+       a & b & c \\
+       0 & d & e \\
+       0 & 0 & f
+       \end{bmatrix}
+       $$
+   - **Lower Triangular**: $a_{ij} = 0$ for $i < j$.
+
+     - Example:
+
+       $$
+       \begin{bmatrix}
+       a & 0 & 0 \\
+       b & c & 0 \\
+       d & e & f
+       \end{bmatrix}
+       $$
+
+   - Number of Minimum Zeroes in Triangular Matrices: $\frac{n^2 - n}{2}$.
+
+   - For triangular matrices: $| \text{triangular} | = \text{product of diagonal elements} = | \text{diagonal matrix} |$.
+     <br>
+
+7. **Diagonal Matrices**:
+
+   - **Diagonal**: $a_{ij} = 0$ for $i \neq j$.
+     - Example:
+       $$
+       \begin{bmatrix}
+       d_1 & 0 & 0 \\
+       0 & d_2 & 0 \\
+       0 & 0 & d_3
+       \end{bmatrix}
+       $$
+   - **Identity Matrix**: All diagonal elements are 1.
+     - Example:
+       $$
+       \begin{bmatrix}
+       1 & 0 & 0 \\
+       0 & 1 & 0 \\
+       0 & 0 & 1
+       \end{bmatrix}
+       $$
+
+## Four Fundamental Sub-Spaces
+
+In linear algebra, the four fundamental subspaces provide a deep understanding of linear transformations and the structure of matrices. These subspaces are associated with a given matrix $A$, typically of dimensions $m \times n$ (where $m$ is the number of rows and $n$ is the number of columns). Let's explore each of these subspaces in detail:
+
+### 1. Column Space (C(A) or Col(A))
+
+- **Definition**: The column space of a matrix $A$ is the set of all possible linear combinations of its column vectors.
+- **Dimensionality**: The dimension of the column space is called the rank of the matrix, denoted as $\text{rank}(A)$. The rank represents the number of linearly independent columns in $A$.
+- **Interpretation**: The column space represents all the possible vectors that can be produced by the linear transformation represented by $A$.
+- **Mathematical Formulation**:
+  $$
+  C(A) = \{ \mathbf{y} \in \mathbb{R}^m \mid \mathbf{y} = A\mathbf{x} \text{ for some } \mathbf{x} \in \mathbb{R}^n \}
+  $$
+
+### 2. Null Space (N(A) or Null(A))
+
+- **Definition**: The null space of a matrix $A$ is the set of all vectors $\mathbf{x}$ that satisfy $A\mathbf{x} = \mathbf{0}$.
+- **Dimensionality**: The dimension of the null space is called the nullity of the matrix, denoted as $\text{nullity}(A)$. The nullity is given by $n - \text{rank}(A)$.
+- **Interpretation**: The null space represents all the vectors that are mapped to the zero vector by the linear transformation represented by $A$.
+- **Mathematical Formulation**:
+  $$
+  N(A) = \{ \mathbf{x} \in \mathbb{R}^n \mid A\mathbf{x} = \mathbf{0} \}
+  $$
+
+### 3. Row Space (Row(A))
+
+- **Definition**: The row space of a matrix $A$ is the set of all possible linear combinations of its row vectors.
+- **Dimensionality**: The dimension of the row space is equal to the rank of the matrix, $\text{rank}(A)$.
+- **Interpretation**: The row space represents all the possible vectors that can be produced by the linear combinations of the row vectors of $A$.
+- **Mathematical Formulation**:
+  $$
+  \text{Row}(A) = \{ \mathbf{y} \in \mathbb{R}^n \mid \mathbf{y} = \mathbf{x}^T A \text{ for some } \mathbf{x} \in \mathbb{R}^m \}
+  $$
+
+### 4. Left Null Space ($N(A^T)$)
+
+- **Definition**: The left null space of a matrix $A$ is the null space of its transpose, $A^T$. It is the set of all vectors $\mathbf{y}$ that satisfy $A^T \mathbf{y} = \mathbf{0}$.
+- **Dimensionality**: The dimension of the left null space is given by $m - \text{rank}(A)$.
+- **Interpretation**: The left null space represents all the vectors that are mapped to the zero vector by the linear transformation represented by $A^T$.
+- **Mathematical Formulation**:
+
+  $$
+  N(A^T) = \{ \mathbf{y} \in \mathbb{R}^m \mid A^T \mathbf{y} = \mathbf{0} \}
+  $$
+
+- **Rank-Nullity Theorem**: The rank-nullity theorem ties the dimensions of the column space and null space together. For an $m \times n$ matrix $A$:
+  $$
+  \text{rank}(A) + \text{nullity}(A) = n
+  $$
+- **Orthogonality**: The null space of $A$ and the row space of $A$ are orthogonal complements in $\mathbb{R}^n$. Similarly, the left null space of $A$ and the column space of $A$ are orthogonal complements in $\mathbb{R}^m$.
+
+These four subspaces provide critical insights into the properties and behaviors of linear transformations and matrices. They help us understand solutions to systems of linear equations, the invertibility of matrices, and more.
+
+<span align='center'>
+
+![Four Fundamental Subspaces](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/50ce4d8cddfa06b9c4d84f7e03a7e0e7_Unit_1_WIDE.jpg)
+
+</span>
+
+$$
+   \begin{pmatrix}
+   x_1 \\
+   x_2 \\
+   . \\
+   . \\
+   x_n
+   \end{pmatrix} y =
+   \begin{pmatrix}
+   0 \\
+   0 \\
+   . \\
+   . \\
+   0
+   \end{pmatrix}
+$$
+
+$x_1$ is a row vector belongs to Row space of matrix A, then y is orthogonal to Row Space. i.e., the null space of A is orthogonal to row space and col space is orthogonal to left null space of matrix A respectively.
+
 ## Properties
 
-### Arithmetic Properties
+**Arithmetic Properties**
 
 There are four basic properties of numbers: commutative, associative, distributive, and identity. Simillar to these properties for numbers, there are similar properties for the arthematic operations performed on matrices. These properties are listed below.
 
@@ -61,7 +220,7 @@ There are four basic properties of numbers: commutative, associative, distributi
 
    - Multiplying a matrix by the identity matrix $I$ does not change the matrix: $AI = IA = A$.
 
-### Trace of a Matrix
+**Trace of a Matrix**
 
 Let $A$ be a square matrix, then the trace of matrix a; denoted by $\text{TR}(\mathbf{A})$ is sum of all the diagonal elements.
 i.e. $\sum_{i=1}^{n}A_{i,i}\quad$ where $n$ is dimension of the matrix.
@@ -78,7 +237,7 @@ $$
 \end{aligned}
 $$
 
-### Matrix Multiplication
+**Matrix Multiplication**
 
 Matrix multiplication is defined as the dot product of rows and columns between two matrices. The number of columns in the first matrix must equal the number of rows in the second matrix.
 
@@ -111,7 +270,7 @@ a_{21}b_{11} + a_{22}b_{21} + a_{23}b_{31} & a_{21}b_{12} + a_{22}b_{22} + a_{23
 \end{pmatrix}
 $$
 
-### Matrix Addition
+**Matrix Addition**
 
 Two matrices of the same dimensions can be added element-wise:
 
@@ -153,7 +312,7 @@ $$
 C^2 = (A+B)(A+B) \\ \quad \quad\quad = A^2 + AB + BA + B^2
 $$
 
-### Hadamard Product
+**Hadamard Product**
 
 The Hadamard product is the element-wise multiplication of two matrices of the same dimensions. If $A$ and $B$ are both $m \times n$ matrices, their Hadamard product $C$ is:
 
@@ -187,7 +346,7 @@ A \circ B = \begin{pmatrix}
 \end{pmatrix}
 $$
 
-### Determinant
+**Determinant**
 
 The determinant is a scalar value that can be computed from a square matrix. It provides important information about the matrix, such as whether it is invertible or how it scales volumes. Let's delve into the details:
 
@@ -452,170 +611,6 @@ $$
    \end{pmatrix}
    $$
 
-## Types of Matrices
-
-1. **Row Matrix:**
-
-   - Having only one row.
-   - Represented as $A = [a_{1j}]$ where $1 \leq j \leq n$.
-
-2. **Column Matrix:**
-
-   - Having only one column.
-   - Represented as $A = [a_{i1}]$.
-
-3. **Horizontal Matrix:**
-
-   - Number of columns (n) > number of rows (m).
-
-4. **Vertical Matrix:**
-
-   - Number of columns (n) < number of rows (m).
-
-5. **Zero Matrix:**
-
-   - Matrix of any order with all entries as 0.
-
-6. **Triangular Matrices**:
-
-   - **Upper Triangular**: $a_{ij} = 0$ for $i > j$.
-     - Example:
-       $$
-       \begin{bmatrix}
-       a & b & c \\
-       0 & d & e \\
-       0 & 0 & f
-       \end{bmatrix}
-       $$
-   - **Lower Triangular**: $a_{ij} = 0$ for $i < j$.
-
-     - Example:
-
-       $$
-       \begin{bmatrix}
-       a & 0 & 0 \\
-       b & c & 0 \\
-       d & e & f
-       \end{bmatrix}
-       $$
-
-     **Number of Minimum Zeroes in Triangular Matrices**:<br>
-
-   - Formula: $\frac{n^2 - n}{2}$.
-
-     **Product of Diagonal Elements**:<br>
-
-   - For triangular matrices: $| \text{triangular} | = \text{product of diagonal elements} = | \text{diagonal matrix} |$.
-     <br>
-
-7. **Diagonal Matrices**:
-
-   - **Diagonal**: $a_{ij} = 0$ for $i \neq j$.
-     - Example:
-       $$
-       \begin{bmatrix}
-       d_1 & 0 & 0 \\
-       0 & d_2 & 0 \\
-       0 & 0 & d_3
-       \end{bmatrix}
-       $$
-   - **Scalar**: All diagonal elements are equal.
-     - Example:
-       $$
-       \begin{bmatrix}
-       a & 0 & 0 \\
-       0 & a & 0 \\
-       0 & 0 & a
-       \end{bmatrix}
-       $$
-   - **Unit Matrix**: All diagonal elements are 1.
-     - Example:
-       $$
-       \begin{bmatrix}
-       1 & 0 & 0 \\
-       0 & 1 & 0 \\
-       0 & 0 & 1
-       \end{bmatrix}
-       $$
-
-## Four Fundamental Sub-Spaces
-
-In linear algebra, the four fundamental subspaces provide a deep understanding of linear transformations and the structure of matrices. These subspaces are associated with a given matrix $A$, typically of dimensions $m \times n$ (where $m$ is the number of rows and $n$ is the number of columns). Let's explore each of these subspaces in detail:
-
-### 1. Column Space (C(A) or Col(A))
-
-- **Definition**: The column space of a matrix $A$ is the set of all possible linear combinations of its column vectors.
-- **Dimensionality**: The dimension of the column space is called the rank of the matrix, denoted as $\text{rank}(A)$. The rank represents the number of linearly independent columns in $A$.
-- **Interpretation**: The column space represents all the possible vectors that can be produced by the linear transformation represented by $A$.
-- **Mathematical Formulation**:
-  $$
-  C(A) = \{ \mathbf{y} \in \mathbb{R}^m \mid \mathbf{y} = A\mathbf{x} \text{ for some } \mathbf{x} \in \mathbb{R}^n \}
-  $$
-
-### 2. Null Space (N(A) or Null(A))
-
-- **Definition**: The null space of a matrix $A$ is the set of all vectors $\mathbf{x}$ that satisfy $A\mathbf{x} = \mathbf{0}$.
-- **Dimensionality**: The dimension of the null space is called the nullity of the matrix, denoted as $\text{nullity}(A)$. The nullity is given by $n - \text{rank}(A)$.
-- **Interpretation**: The null space represents all the vectors that are mapped to the zero vector by the linear transformation represented by $A$.
-- **Mathematical Formulation**:
-  $$
-  N(A) = \{ \mathbf{x} \in \mathbb{R}^n \mid A\mathbf{x} = \mathbf{0} \}
-  $$
-
-### 3. Row Space (Row(A))
-
-- **Definition**: The row space of a matrix $A$ is the set of all possible linear combinations of its row vectors.
-- **Dimensionality**: The dimension of the row space is equal to the rank of the matrix, $\text{rank}(A)$.
-- **Interpretation**: The row space represents all the possible vectors that can be produced by the linear combinations of the row vectors of $A$.
-- **Mathematical Formulation**:
-  $$
-  \text{Row}(A) = \{ \mathbf{y} \in \mathbb{R}^n \mid \mathbf{y} = \mathbf{x}^T A \text{ for some } \mathbf{x} \in \mathbb{R}^m \}
-  $$
-
-### 4. Left Null Space ($N(A^T)$)
-
-- **Definition**: The left null space of a matrix $A$ is the null space of its transpose, $A^T$. It is the set of all vectors $\mathbf{y}$ that satisfy $A^T \mathbf{y} = \mathbf{0}$.
-- **Dimensionality**: The dimension of the left null space is given by $m - \text{rank}(A)$.
-- **Interpretation**: The left null space represents all the vectors that are mapped to the zero vector by the linear transformation represented by $A^T$.
-- **Mathematical Formulation**:
-
-  $$
-  N(A^T) = \{ \mathbf{y} \in \mathbb{R}^m \mid A^T \mathbf{y} = \mathbf{0} \}
-  $$
-
-- **Rank-Nullity Theorem**: The rank-nullity theorem ties the dimensions of the column space and null space together. For an $m \times n$ matrix $A$:
-  $$
-  \text{rank}(A) + \text{nullity}(A) = n
-  $$
-- **Orthogonality**: The null space of $A$ and the row space of $A$ are orthogonal complements in $\mathbb{R}^n$. Similarly, the left null space of $A$ and the column space of $A$ are orthogonal complements in $\mathbb{R}^m$.
-
-These four subspaces provide critical insights into the properties and behaviors of linear transformations and matrices. They help us understand solutions to systems of linear equations, the invertibility of matrices, and more.
-
-<span align='center'>
-
-![Four Fundamental Subspaces](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/50ce4d8cddfa06b9c4d84f7e03a7e0e7_Unit_1_WIDE.jpg)
-
-</span>
-
-$$
-   \begin{pmatrix}
-   x_1 \\
-   x_2 \\
-   . \\
-   . \\
-   x_n
-   \end{pmatrix} y =
-   \begin{pmatrix}
-   0 \\
-   0 \\
-   . \\
-   . \\
-   0
-   \end{pmatrix}
-$$
-
-$x_1$ is a row vector belongs to Row space of matrix A, then y is orthogonal to Row Space. i.e., the null space of A is orthogonal to row space and col space is orthogonal to left null space of matrix A respectively.
-
 ## System of Linear Equations
 
 A **system of linear equations** is a set of two or more linear equations with the same set of variables. Each equation represents a straight line, and the solution to the system is the point or points where the lines intersect.
@@ -710,7 +705,7 @@ Key to solving a system of linear equations are elementary transformations that 
 - Multiplication of an equation (row) with a constant λ ∈ R\{0}
 - Addition of two equations (rows)
 
-Note: The `augmented matrix` [A| b] compactly represents the system of linear equations Ax = b.
+<!-- Note: The `augmented matrix` [A| b] compactly represents the system of linear equations Ax = b. -->
 
 > (Pivots and Staircase Structure): The leading coefficient of a row pivot (first nonzero number from the left) is called the pivot and is always strictly to the right of the pivot of the row above it. Therefore, any equation system in row-echelon form always has a “staircase” structure.
 
@@ -1686,7 +1681,7 @@ III. $A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ and $B = \begin{bmatrix}
 
 ## Appendix
 
-<span align='center'>
+<!-- <span align='center'> -->
 
 ### Notation and Nomenclature
 
@@ -1731,5 +1726,4 @@ III. $A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}$ and $B = \begin{bmatrix}
 | $Σ\quad$          | A positive definite matrix                                                           |
 | $Λ\quad$          | A diagonal matrix                                                                    |
 
-</span>
-</span>
+<!-- </span> -->

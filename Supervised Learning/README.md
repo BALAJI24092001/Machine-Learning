@@ -3,8 +3,6 @@
 Supervised Machine Learning is where models are trained on data to predict something. The data model is built in such a way that the predicted values and original values are as close/similar as possible.
 There are two types of prediction models, where we predict either continuous outcome(Regression) or classifying an observation into a suitable category.(Classification).
 
-Supervised learning is a machine learning approach where a model is trained on labeled data. Here's a list of commonly used models in supervised learning, categorized into different types:
-
 ---
 
 ## Contents

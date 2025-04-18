@@ -1,8 +1,14 @@
-# Machine-Learning-Notes
+# Machine-Learning
 
 Machine learning is about designing algorithms that automatically extract valuable information from data. The emphasis here is on “automatic”, i.e., machine learning is concerned about general-purpose methodologies that can be applied to many datasets, while producing something that is meaningful. There are three concepts that are at the core of machine learning: data, a model, and learning.
 
 Since machine learning is inherently data driven, data is at the core of machine learning. The goal of machine learning is to design general purpose methodologies to extract valuable patterns from data, ideally without much domain-specific expertise.
+
+The main objective of Machine Learning is to make a machine learn about certain topic to make it as closely intelligent to human professional as possible. There are three different paradigms in Machine Learning. These are
+
+1. [Supervised Learning](./Supervised%20Learning/README.md)
+2. [Un-Supervised Learning]()
+3. [Reinforcement Learning]()
 
 To paraphrase Mitchell (1997):<mark> A model is said to learn from data if its performance on a given task improves after the data is taken into account. The goal is to find good models that generalize well to yet unseen data, which we may care about in the future. Learning can be understood as a way to automatically find patterns and structure in data by optimizing the parameters of the model. </mark>
 
