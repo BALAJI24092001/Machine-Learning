@@ -6,9 +6,13 @@ Since machine learning is inherently data driven, data is at the core of machine
 
 The main objective of Machine Learning is to make a machine learn about certain topic to make it as closely intelligent to human professional as possible. There are three different paradigms in Machine Learning. These are
 
-1. [Supervised Learning](./Supervised%20Learning/README.md)
-2. [Un-Supervised Learning]()
-3. [Reinforcement Learning]()
+1. [Supervised Learning](./Supervised%20Learning/)
+2. [Un-Supervised Learning](./Unsupervised%20Learning/)
+3. [Reinforcement Learning](./Reinforcement%20Learning/)
+
+There is some advancements in supervised learning methods that gave raise to a new paradigm called Deep Learning which is essentially comes under Supervised Learning but since it has a huge conceptual understanding for itself, it is considered at a different paradigm in approaching machines to learn. So far the Deep Learning Paradigm got into many learning section like, language understanding, speach understand and visoin understanding etc... Further more there are a different types of neural architectures which are getting specialized in different intellegence, makking these models getting closer to narrow intelligence with the advantage of lagrge data sets and huge compute.
+
+4. [Deep Learning](./DeepLearning/)
 
 To paraphrase Mitchell (1997):<mark> A model is said to learn from data if its performance on a given task improves after the data is taken into account. The goal is to find good models that generalize well to yet unseen data, which we may care about in the future. Learning can be understood as a way to automatically find patterns and structure in data by optimizing the parameters of the model. </mark>
 

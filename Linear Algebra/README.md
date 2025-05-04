@@ -4,6 +4,12 @@
 
 </span>
 
+The generic term Algebra is a field of Mathematics that provieds rules to play around with different types of mathematical objects.
+
+**Mathematical objects** are values given to a variable, so that the variable has a particular nature to it.
+
+The Elementary Algebra focus on properties of real numbers and variables. Where as Linear algebra focus on vectors. Vectors are a type of mathematical objects defined in a higher dimensional plane to represent a location in that space. Simple put, Linear Algera is the gaming console to play the game of vectors.
+
 ## Introduction
 
 Imagine a coordinate system of 2 dimensions, then a vector can be imagined as a specific point in that space represented with 2 numbers in a specific order, which guides us to move by scale in each direction of the imagined 2 dimensional space.
@@ -12,7 +18,7 @@ Let $x$ be a 2 dim vector, $x = (1, 2)^T$, then the vector $x$ is the point situ
 
 Simillarly for an n dimensional space, a vector is represented by n numbers in specific order that represents a specific point in that coordinate system.
 
-**Vectors**
+<u>**Vectors**</u>
 
 A vector is an array of numbers. The numbers are arranged in order. We can identify each individual number by its index in that ordering. Typically, we give vectors lower case names written in bold typeface, such as $\textbf{\textit{x}}$. The elements of the vector are identified by writing its name in italic typeface, with a subscript. The first element of $\textbf{\textit{x}}$ is $\textit{x}_1$, the second element is $\textit{x}_2$ and so on. We also need to say what kind of numbers are stored in the vector. If each element is in $\mathbb{R}$, and the vector has n elements, then the vector lies in the set formed by taking the Cartesian product of R n times, denoted as $\mathbb{R}^n$. When we need to explicitly identify the elements of a vector, we write them as a column enclosed in square brackets.
 
@@ -25,11 +31,9 @@ x_n
 \end{pmatrix}An
 $$
 
-**NOTE**: A vector is always a columnt vector, i.e., a matrix of dimension $n\times1$.
+<u>**Matrices**</u>
 
-**Matrices**
-
-The intuitive understanding of a matrix comes from the usecase of matrices. Take an identity matrix, which is all values of 1 in the diagonal positions and all 0 in non-diagonal poisitions. If the identity matrix is of dim n, then a column vector of dim n is said to be the linear combination of the column vectors of the identity matrix. In general, the column vectors in the identity matrix are called the trival basis.
+The intuitive understanding of a matrix comes from the usecase of matrices. Take an identity matrix, which is values of 1 in the diagonal positions and all 0 in non-diagonal poisitions. If the identity matrix is of dim n, then a column vector of dim n is said to be the linear combination of the column vectors of the identity matrix. In general, the column vectors in the identity matrix are called the trival basis.
 
 - Elements in a rectangular array with numbers in rows and columns.
 - Order of a matrix is given by $m \times n$ where $m$ is the number of rows and $n$ is the number of columns.
@@ -38,7 +42,11 @@ The intuitive understanding of a matrix comes from the usecase of matrices. Take
 - Horizontal elements are called rows.
 - Vertical elements are called columns.
 
-**Tensors**
+**NOTE**: A vector is always a columnt vector, i.e., a matrix of dimension $n\times1$.
+
+Imagine we are given a vector and we are left-multiplying the vector with a matrix, what we're doing is, we're transforming the original matrix from the standard basis positions to different basis, with the column vectors fromt the matrix being the new axis for each dimension. A Matrix is a function that transforms a vector, based on the type and dimensions of the Matrix, there are different types of transformations.
+
+<u>**Tensors**</u>
 
 In some cases we will need an array with more than two axes. In the general case, an array of numbers arranged on a regular grid with a variable number of axes is known as a tensor. We denote a tensor named "A" with this typeface: **A**. We identify the element of **A** at coordinates $(i, j, k)$ by writing $A_{i,j,k}$.
 
@@ -193,7 +201,7 @@ $$
 
 $x_1$ is a row vector belongs to Row space of matrix A, then y is orthogonal to Row Space. i.e., the null space of A is orthogonal to row space and col space is orthogonal to left null space of matrix A respectively.
 
-## Properties
+## Properties of Matrices
 
 **Arithmetic Properties**
 
